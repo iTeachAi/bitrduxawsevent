@@ -281,25 +281,27 @@ function Nav() {
           width: 36, height: 36, borderRadius: 12,
           background: "linear-gradient(135deg, #6366f1, #06b6d4)",
           display: "flex", alignItems: "center", justifyContent: "center",
-          fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 13, color: "#fff",
+          fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 11, color: "#fff",
           letterSpacing: "-0.02em",
-        }}>AI</div>
+        }}>BIT</div>
         <span style={{
-          fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 15,
-          color: "rgba(255,255,255,0.9)", letterSpacing: "-0.03em",
-        }}>AgentLab</span>
+          fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 14,
+          color: "rgba(255,255,255,0.95)", letterSpacing: "-0.03em",
+        }}>Blacks in Technology RDU</span>
       </div>
-      <motion.button
-        onClick={() => scrollToSection("register")}
+      <motion.a
+        href="https://www.eventbrite.com"
+        target="_blank"
+        rel="noopener noreferrer"
         whileHover={{ scale: 1.06 }}
         whileTap={{ scale: 0.95 }}
         style={{
           padding: "10px 24px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.12)",
           background: "rgba(255,255,255,0.05)", color: "#fff", fontSize: 13,
           fontFamily: "'Syne', sans-serif", fontWeight: 600, cursor: "pointer",
-          backdropFilter: "blur(12px)", letterSpacing: "0.01em",
+          backdropFilter: "blur(12px)", letterSpacing: "0.01em", textDecoration: "none",
         }}
-      >Register</motion.button>
+      >Register</motion.a>
     </motion.nav>
   );
 }
@@ -584,8 +586,10 @@ export default function EventPage() {
             transition={{ duration: 0.8, delay: 1.2 }}
             style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center", position: "relative", zIndex: 2 }}
           >
-            <motion.button
-              onClick={() => scrollToSection("register")}
+            <motion.a
+              href="https://www.eventbrite.com"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               className="cta-btn"
@@ -595,10 +599,11 @@ export default function EventPage() {
                 color: "#fff", fontSize: 15, fontWeight: 700, cursor: "pointer",
                 fontFamily: "'Syne', sans-serif", letterSpacing: "-0.01em",
                 boxShadow: "0 0 30px rgba(99,102,241,0.25), 0 0 60px rgba(6,182,212,0.1)",
+                textDecoration: "none", display: "inline-block",
               }}
             >
               Reserve Your Spot →
-            </motion.button>
+            </motion.a>
             <motion.button
               onClick={() => scrollToSection("about")}
               whileHover={{ scale: 1.04 }}
@@ -1042,7 +1047,10 @@ export default function EventPage() {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <motion.button
+            <motion.a
+              href="https://www.eventbrite.com"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="cta-btn"
@@ -1052,11 +1060,11 @@ export default function EventPage() {
                 color: "#fff", fontSize: 18, fontWeight: 800, cursor: "pointer",
                 fontFamily: "'Syne', sans-serif", letterSpacing: "-0.01em",
                 boxShadow: "0 0 40px rgba(99,102,241,0.3), 0 0 80px rgba(6,182,212,0.12)",
-                position: "relative",
+                position: "relative", textDecoration: "none", display: "inline-block",
               }}
             >
               Register Now →
-            </motion.button>
+            </motion.a>
 
             <p className="mono" style={{
               marginTop: 24, fontSize: 11,
@@ -1078,7 +1086,7 @@ export default function EventPage() {
         textAlign: "center", zIndex: 2, position: "relative",
       }}>
         <p className="mono" style={{ fontSize: 11, color: "rgba(255,255,255,0.15)", letterSpacing: "0.06em" }}>
-          AgentLab Workshop · May 4, 2026
+          Blacks in Technology RDU · May 4, 2026
         </p>
         <p className="mono" style={{ fontSize: 10, color: "rgba(255,255,255,0.08)", marginTop: 8, letterSpacing: "0.06em" }}>
           Powered by AWS & Northwestern Mutual
