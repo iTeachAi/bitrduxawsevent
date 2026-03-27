@@ -339,7 +339,7 @@ function StatNumber({ value, suffix = "", label }) {
       }}>
         {count}{suffix}
       </div>
-      <p style={{ fontSize: 13, color: "rgba(255,255,255,0.35)", marginTop: 8,
+      <p style={{ fontSize: 13, color: "rgba(255,255,255,0.65)", marginTop: 8,
         fontFamily: "'Syne', sans-serif", fontWeight: 500, letterSpacing: "0.06em", textTransform: "uppercase" }}>
         {label}
       </p>
@@ -525,7 +525,7 @@ export default function EventPage() {
               width: 6, height: 6, borderRadius: "50%", background: "#34d399",
               boxShadow: "0 0 10px #34d399",
             }} />
-            <span className="mono" style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", letterSpacing: "0.05em" }}>
+            <span className="mono" style={{ fontSize: 12, color: "rgba(255,255,255,0.7)", letterSpacing: "0.05em" }}>
               MAY 4, 2026 — 6:00 PM
             </span>
           </motion.div>
@@ -554,7 +554,7 @@ export default function EventPage() {
               backgroundClip: "text",
             }}>AI Agents</em>
             <br />
-            <span style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.55em" }}>with</span>{" "}
+            <span style={{ color: "rgba(255,255,255,0.65)", fontSize: "0.55em" }}>with</span>{" "}
             <span style={{
               background: "linear-gradient(90deg, #f59e0b, #f97316)",
               WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
@@ -569,7 +569,7 @@ export default function EventPage() {
             transition={{ duration: 1, delay: 0.9 }}
             style={{
               fontSize: "clamp(15px, 2vw, 18px)",
-              color: "rgba(255,255,255,0.35)",
+              color: "rgba(255,255,255,0.65)",
               maxWidth: 480, lineHeight: 1.7,
               marginBottom: 48, position: "relative", zIndex: 2,
               fontWeight: 400,
@@ -628,7 +628,7 @@ export default function EventPage() {
             className="mono"
             style={{
               marginTop: 56, fontSize: 11,
-              color: "rgba(255,255,255,0.2)",
+              color: "rgba(255,255,255,0.7)",
               letterSpacing: "0.12em", textTransform: "uppercase",
               position: "relative", zIndex: 2,
             }}
@@ -658,7 +658,7 @@ export default function EventPage() {
           <Reveal>
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
               <div style={{ width: 32, height: 1, background: "rgba(99,102,241,0.5)" }} />
-              <span className="mono" style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+              <span className="mono" style={{ fontSize: 11, color: "rgba(255,255,255,0.6)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
                 What This Is
               </span>
             </div>
@@ -678,7 +678,7 @@ export default function EventPage() {
 
           <Reveal delay={0.2}>
             <p style={{
-              fontSize: 16, color: "rgba(255,255,255,0.3)",
+              fontSize: 16, color: "rgba(255,255,255,0.6)",
               maxWidth: 520, lineHeight: 1.8, marginBottom: 64,
             }}>
               Build functional AI agents from scratch using AWS tools — with real cloud
@@ -708,7 +708,7 @@ export default function EventPage() {
                     fontFamily: "'Instrument Serif', serif", fontStyle: "italic",
                   }}>{item.icon}</div>
                   <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 10, letterSpacing: "-0.02em" }}>{item.title}</h3>
-                  <p style={{ fontSize: 14, color: "rgba(255,255,255,0.3)", lineHeight: 1.7 }}>{item.desc}</p>
+                  <p style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", lineHeight: 1.7 }}>{item.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -724,7 +724,7 @@ export default function EventPage() {
           <Reveal>
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
               <div style={{ width: 32, height: 1, background: "rgba(6,182,212,0.5)" }} />
-              <span className="mono" style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+              <span className="mono" style={{ fontSize: 11, color: "rgba(255,255,255,0.6)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
                 The Experience
               </span>
             </div>
@@ -771,7 +771,7 @@ export default function EventPage() {
                   }} />
 
                   <h3 style={{ fontSize: 17, fontWeight: 700, marginBottom: 10, letterSpacing: "-0.01em" }}>{item.title}</h3>
-                  <p style={{ fontSize: 14, color: "rgba(255,255,255,0.3)", lineHeight: 1.7 }}>{item.desc}</p>
+                  <p style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", lineHeight: 1.7 }}>{item.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -787,7 +787,7 @@ export default function EventPage() {
           <Reveal>
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
               <div style={{ width: 32, height: 1, background: "rgba(52,211,153,0.5)" }} />
-              <span className="mono" style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+              <span className="mono" style={{ fontSize: 11, color: "rgba(255,255,255,0.6)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
                 Who It's For
               </span>
             </div>
@@ -802,7 +802,7 @@ export default function EventPage() {
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
-            <p style={{ fontSize: 16, color: "rgba(255,255,255,0.3)", maxWidth: 460, lineHeight: 1.8, marginBottom: 56 }}>
+            <p style={{ fontSize: 16, color: "rgba(255,255,255,0.6)", maxWidth: 460, lineHeight: 1.8, marginBottom: 56 }}>
               Whether you've never written code or you're building side projects — there's a seat here.
             </p>
           </Reveal>
@@ -824,7 +824,7 @@ export default function EventPage() {
                     fontStyle: "italic", opacity: 0.7,
                   }}>{a.icon}</div>
                   <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 6, letterSpacing: "-0.01em" }}>{a.label}</h3>
-                  <p style={{ fontSize: 13, color: "rgba(255,255,255,0.25)" }}>{a.sub}</p>
+                  <p style={{ fontSize: 13, color: "rgba(255,255,255,0.55)" }}>{a.sub}</p>
                 </div>
               </Reveal>
             ))}
@@ -840,7 +840,7 @@ export default function EventPage() {
           <Reveal>
             <Glass hover={false} className="glass-border" style={{ padding: "56px 48px", textAlign: "center" }}>
               <span className="mono" style={{
-                fontSize: 11, color: "rgba(255,255,255,0.25)",
+                fontSize: 11, color: "rgba(255,255,255,0.55)",
                 letterSpacing: "0.12em", textTransform: "uppercase",
                 display: "block", marginBottom: 24,
               }}>
@@ -874,7 +874,7 @@ export default function EventPage() {
                     transition={{ delay: 0.1 * i, duration: 0.6 }}
                   >
                     <p className="mono" style={{
-                      fontSize: 10, color: "rgba(255,255,255,0.2)",
+                      fontSize: 10, color: "rgba(255,255,255,0.7)",
                       letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8,
                     }}>{d.label}</p>
                     <p className="serif" style={{
@@ -894,7 +894,7 @@ export default function EventPage() {
       <section style={{ position: "relative", padding: "80px 32px 120px", zIndex: 2, textAlign: "center" }}>
         <Reveal>
           <span className="mono" style={{
-            fontSize: 11, color: "rgba(255,255,255,0.2)",
+            fontSize: 11, color: "rgba(255,255,255,0.7)",
             letterSpacing: "0.12em", textTransform: "uppercase",
           }}>Proudly Sponsored By</span>
         </Reveal>
@@ -934,7 +934,7 @@ export default function EventPage() {
           <Reveal>
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
               <div style={{ width: 32, height: 1, background: "rgba(244,114,182,0.5)" }} />
-              <span className="mono" style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+              <span className="mono" style={{ fontSize: 11, color: "rgba(255,255,255,0.6)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
                 Why It Matters
               </span>
             </div>
@@ -985,7 +985,7 @@ export default function EventPage() {
                     marginBottom: 24,
                   }} />
                   <h3 style={{ fontSize: 17, fontWeight: 700, marginBottom: 10, letterSpacing: "-0.01em" }}>{item.title}</h3>
-                  <p style={{ fontSize: 14, color: "rgba(255,255,255,0.3)", lineHeight: 1.7 }}>{item.desc}</p>
+                  <p style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", lineHeight: 1.7 }}>{item.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -1025,7 +1025,7 @@ export default function EventPage() {
         <div style={{ position: "relative", zIndex: 2, maxWidth: 700, margin: "0 auto" }}>
           <Reveal>
             <span className="mono" style={{
-              fontSize: 11, color: "rgba(255,255,255,0.2)",
+              fontSize: 11, color: "rgba(255,255,255,0.7)",
               letterSpacing: "0.12em", textTransform: "uppercase",
               display: "block", marginBottom: 32,
             }}>Don't Miss Out</span>
@@ -1039,7 +1039,7 @@ export default function EventPage() {
             </h2>
 
             <p style={{
-              fontSize: 17, color: "rgba(255,255,255,0.3)",
+              fontSize: 17, color: "rgba(255,255,255,0.6)",
               maxWidth: 440, margin: "0 auto 48px", lineHeight: 1.7,
             }}>
               Seats are limited. Join us May 4th and build your first AI agent with AWS.
@@ -1068,7 +1068,7 @@ export default function EventPage() {
 
             <p className="mono" style={{
               marginTop: 24, fontSize: 11,
-              color: "rgba(255,255,255,0.15)",
+              color: "rgba(255,255,255,0.45)",
               letterSpacing: "0.08em",
             }}>
               FREE TO ATTEND · AWS CREDITS INCLUDED
@@ -1085,10 +1085,10 @@ export default function EventPage() {
         borderTop: "1px solid rgba(255,255,255,0.04)",
         textAlign: "center", zIndex: 2, position: "relative",
       }}>
-        <p className="mono" style={{ fontSize: 11, color: "rgba(255,255,255,0.15)", letterSpacing: "0.06em" }}>
+        <p className="mono" style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", letterSpacing: "0.06em" }}>
           Blacks in Technology RDU · May 4, 2026
         </p>
-        <p className="mono" style={{ fontSize: 10, color: "rgba(255,255,255,0.08)", marginTop: 8, letterSpacing: "0.06em" }}>
+        <p className="mono" style={{ fontSize: 10, color: "rgba(255,255,255,0.35)", marginTop: 8, letterSpacing: "0.06em" }}>
           Powered by AWS & Northwestern Mutual
         </p>
       </footer>
