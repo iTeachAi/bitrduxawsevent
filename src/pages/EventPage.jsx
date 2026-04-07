@@ -625,7 +625,7 @@ function ContactForm() {
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
     setStatus("sending");
     try {
-      const res = await fetch(`https://formsubmit.co/ajax/marqueso@blacksintechnology.com`, {
+      const res = await fetch(`https://formsubmit.co/ajax/const res = await fetch(`https://formsubmit.co/ajax/marqueso@blacksintechnology.org`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
@@ -1453,7 +1453,7 @@ export default function EventPage() {
                     fontSize: 14, color: "rgba(255,255,255,0.4)",
                     letterSpacing: "0.06em",
                   }}>
-                    marqueso@blacksintechnology.com
+                    marqueso@blacksintechnology.org
                   </p>
                 </div>
 
