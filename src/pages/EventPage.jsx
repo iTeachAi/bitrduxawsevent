@@ -423,7 +423,7 @@ function Nav() {
   const navLinks = [
     { label: "Schedule", id: "schedule" },
     { label: "About", id: "about" },
-    { label: "Venue", id: "venue" },
+    { label: "Venue & Contact", id: "venue" },
     { label: "Register", id: "register" },
   ];
 
