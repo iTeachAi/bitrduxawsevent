@@ -487,7 +487,7 @@ function Nav() {
 
       <MagneticWrap strength={0.2}>
         <motion.a
-          href="https://www.eventbrite.com"
+          href="https://www.eventbrite.com/e/build-your-own-agent-workshop-with-aws-tickets-1986867145116?aff=oddtdtcreator"
           target="_blank"
           rel="noopener noreferrer"
           whileHover={{ scale: 1.06, boxShadow: "0 0 30px rgba(99,102,241,0.3)" }}
@@ -943,7 +943,7 @@ export default function EventPage() {
           >
             <MagneticWrap strength={0.15}>
               <motion.a
-                href="https://www.eventbrite.com"
+                href="https://www.eventbrite.com/e/build-your-own-agent-workshop-with-aws-tickets-1986867145116?aff=oddtdtcreator"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.04 }}
@@ -1472,7 +1472,7 @@ export default function EventPage() {
           <Reveal delay={0.2}>
             <MagneticWrap strength={0.2}>
               <motion.a
-                href="https://www.eventbrite.com"
+                href="https://www.eventbrite.com/e/build-your-own-agent-workshop-with-aws-tickets-1986867145116?aff=oddtdtcreator"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.06 }}
