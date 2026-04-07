@@ -609,119 +609,6 @@ function InfoPill({ icon, label, value }) {
   );
 }
 
-/* ══════════════════════════════════════════
-   CONTACT FORM
-   ══════════════════════════════════════════ */
-function ContactForm() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
-
-  const handleChange = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
-    setStatus("sending");
-    try {
-      const res = await fetch(`https://formsubmit.co/ajax/const res = await fetch(`https://formsubmit.co/ajax/marqueso@blacksintechnology.org`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          message: form.message,
-          _subject: "BIT RDU Workshop Inquiry",
-        }),
-      });
-      if (res.ok) {
-        setStatus("sent");
-        setForm({ name: "", email: "", message: "" });
-      } else {
-        setStatus("error");
-      }
-    } catch {
-      setStatus("error");
-    }
-  };
-
-  const inputStyle = {
-    width: "100%", padding: "14px 18px", borderRadius: 14,
-    background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.08)",
-    color: "#fff", fontSize: 16,
-    fontFamily: "'Syne', sans-serif",
-    outline: "none", transition: "border-color 0.3s ease",
-  };
-
-  return (
-    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-      <input
-        type="text"
-        name="name"
-        placeholder="Your name"
-        value={form.name}
-        onChange={handleChange}
-        required
-        style={inputStyle}
-        onFocus={(e) => e.target.style.borderColor = "rgba(99,102,241,0.4)"}
-        onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Your email"
-        value={form.email}
-        onChange={handleChange}
-        required
-        style={inputStyle}
-        onFocus={(e) => e.target.style.borderColor = "rgba(99,102,241,0.4)"}
-        onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
-      />
-      <textarea
-        name="message"
-        placeholder="Your message"
-        value={form.message}
-        onChange={handleChange}
-        required
-        rows={5}
-        style={{ ...inputStyle, resize: "vertical", minHeight: 120 }}
-        onFocus={(e) => e.target.style.borderColor = "rgba(99,102,241,0.4)"}
-        onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
-      />
-      <MagneticWrap strength={0.15}>
-        <motion.button
-          type="submit"
-          disabled={status === "sending"}
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.96 }}
-          style={{
-            padding: "16px 40px", borderRadius: 100, border: "none",
-            background: "linear-gradient(135deg, #6366f1, #06b6d4)",
-            color: "#fff", fontSize: 16, fontWeight: 700, cursor: "pointer",
-            fontFamily: "'Syne', sans-serif", letterSpacing: "-0.01em",
-            opacity: status === "sending" ? 0.6 : 1,
-            boxShadow: "0 0 30px rgba(99,102,241,0.2)",
-            width: "100%",
-          }}
-        >
-          {status === "sending" ? "Sending..." : status === "sent" ? "Message Sent ✓" : "Send Message →"}
-        </motion.button>
-      </MagneticWrap>
-      {status === "error" && (
-        <p style={{ fontSize: 14, color: "#f87171", textAlign: "center" }}>
-          Something went wrong. Please email us directly.
-        </p>
-      )}
-      {status === "sent" && (
-        <p style={{ fontSize: 14, color: "#34d399", textAlign: "center" }}>
-          Thanks! We'll be in touch soon.
-        </p>
-      )}
-    </form>
-  );
-}
 
 /* ══════════════════════════════════════════
    MAIN PAGE
@@ -1430,35 +1317,45 @@ export default function EventPage() {
             </Glass>
           </Reveal>
 
-          {/* Contact Form */}
+          {/* Contact */}
           <Reveal delay={0.25}>
-            <Glass hover={false} className="glass-border" style={{ padding: "56px 52px", overflow: "hidden" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "start" }}>
-                <div>
-                  <h3 className="serif" style={{
-                    fontSize: "clamp(28px, 4vw, 42px)",
-                    fontWeight: 400, fontStyle: "italic", marginBottom: 20,
-                    lineHeight: 1.15,
-                  }}>
-                    Get in <em style={{ color: "#34d399" }}>touch</em>
-                  </h3>
-                  <p style={{
-                    fontSize: 18, color: "rgba(255,255,255,0.55)",
-                    lineHeight: 1.8, marginBottom: 20,
-                  }}>
-                    Have questions about the workshop, sponsorship, or anything else?
-                    Drop us a line and we'll get back to you.
-                  </p>
-                  <p className="mono" style={{
-                    fontSize: 14, color: "rgba(255,255,255,0.4)",
-                    letterSpacing: "0.06em",
-                  }}>
-                    marqueso@blacksintechnology.org
-                  </p>
-                </div>
-
-                <ContactForm />
-              </div>
+            <Glass hover={false} className="glass-border" style={{ padding: "56px 52px", overflow: "hidden", textAlign: "center" }}>
+              <h3 className="serif" style={{
+                fontSize: "clamp(28px, 4vw, 42px)",
+                fontWeight: 400, fontStyle: "italic", marginBottom: 20,
+                lineHeight: 1.15,
+              }}>
+                Get in <em style={{ color: "#34d399" }}>touch</em>
+              </h3>
+              <p style={{
+                fontSize: 18, color: "rgba(255,255,255,0.55)",
+                lineHeight: 1.8, marginBottom: 32, maxWidth: 540, margin: "0 auto 32px",
+              }}>
+                Have questions about the workshop, sponsorship, or anything else? Reach out to us directly.
+              </p>
+              <motion.a
+                href="mailto:marqueso@blacksintechnology.org?subject=BIT%20RDU%20Workshop%20Inquiry"
+                whileHover={{ scale: 1.06, boxShadow: "0 0 40px rgba(52,211,153,0.35)" }}
+                whileTap={{ scale: 0.97 }}
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: 12,
+                  padding: "18px 48px", borderRadius: 999,
+                  background: "linear-gradient(135deg, #34d399, #059669)",
+                  color: "#000", fontWeight: 700, fontSize: 18,
+                  fontFamily: "'Syne', sans-serif",
+                  textDecoration: "none", letterSpacing: "0.02em",
+                  cursor: "pointer", border: "none",
+                }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                Contact Us
+              </motion.a>
+              <p className="mono" style={{
+                fontSize: 14, color: "rgba(255,255,255,0.4)",
+                letterSpacing: "0.06em", marginTop: 20,
+              }}>
+                marqueso@blacksintechnology.org
+              </p>
             </Glass>
           </Reveal>
         </div>
