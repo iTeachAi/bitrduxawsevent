@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo, Fragment } from "react";
 import { motion, useInView, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 
 /* ══════════════════════════════════════════
@@ -423,7 +423,7 @@ function Nav() {
   const navLinks = [
     { label: "Schedule", id: "schedule" },
     { label: "About", id: "about" },
-    { label: "Venue", id: "venue" },
+    { label: "Venue & Contact", id: "venue" },
     { label: "Register", id: "register" },
   ];
 
@@ -606,6 +606,120 @@ function InfoPill({ icon, label, value }) {
         </div>
       </motion.div>
     </MagneticWrap>
+  );
+}
+
+/* ══════════════════════════════════════════
+   CONTACT FORM
+   ══════════════════════════════════════════ */
+function ContactForm() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+
+  const handleChange = (e) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
+    setStatus("sending");
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/marqueso@blacksintechnology.com`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          _subject: "BIT RDU Workshop Inquiry",
+        }),
+      });
+      if (res.ok) {
+        setStatus("sent");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  const inputStyle = {
+    width: "100%", padding: "14px 18px", borderRadius: 14,
+    background: "rgba(255,255,255,0.04)",
+    border: "1px solid rgba(255,255,255,0.08)",
+    color: "#fff", fontSize: 16,
+    fontFamily: "'Syne', sans-serif",
+    outline: "none", transition: "border-color 0.3s ease",
+  };
+
+  return (
+    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+      <input
+        type="text"
+        name="name"
+        placeholder="Your name"
+        value={form.name}
+        onChange={handleChange}
+        required
+        style={inputStyle}
+        onFocus={(e) => e.target.style.borderColor = "rgba(99,102,241,0.4)"}
+        onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Your email"
+        value={form.email}
+        onChange={handleChange}
+        required
+        style={inputStyle}
+        onFocus={(e) => e.target.style.borderColor = "rgba(99,102,241,0.4)"}
+        onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
+      />
+      <textarea
+        name="message"
+        placeholder="Your message"
+        value={form.message}
+        onChange={handleChange}
+        required
+        rows={5}
+        style={{ ...inputStyle, resize: "vertical", minHeight: 120 }}
+        onFocus={(e) => e.target.style.borderColor = "rgba(99,102,241,0.4)"}
+        onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
+      />
+      <MagneticWrap strength={0.15}>
+        <motion.button
+          type="submit"
+          disabled={status === "sending"}
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.96 }}
+          style={{
+            padding: "16px 40px", borderRadius: 100, border: "none",
+            background: "linear-gradient(135deg, #6366f1, #06b6d4)",
+            color: "#fff", fontSize: 16, fontWeight: 700, cursor: "pointer",
+            fontFamily: "'Syne', sans-serif", letterSpacing: "-0.01em",
+            opacity: status === "sending" ? 0.6 : 1,
+            boxShadow: "0 0 30px rgba(99,102,241,0.2)",
+            width: "100%",
+          }}
+        >
+          {status === "sending" ? "Sending..." : status === "sent" ? "Message Sent ✓" : "Send Message →"}
+        </motion.button>
+      </MagneticWrap>
+      {status === "error" && (
+        <p style={{ fontSize: 14, color: "#f87171", textAlign: "center" }}>
+          Something went wrong. Please email us directly.
+        </p>
+      )}
+      {status === "sent" && (
+        <p style={{ fontSize: 14, color: "#34d399", textAlign: "center" }}>
+          Thanks! We'll be in touch soon.
+        </p>
+      )}
+    </form>
   );
 }
 
@@ -1206,38 +1320,55 @@ export default function EventPage() {
       <div className="section-divider" />
 
       {/* ═══════════════════════════════════
-          VENUE & LOCATION
+          VENUE & CONTACT — Combined section
          ═══════════════════════════════════ */}
       <section id="venue" style={{ position: "relative", padding: "140px 32px", zIndex: 2 }}>
-        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <Reveal>
             <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
               <div className="shimmer-line" style={{ width: 40, height: 2 }} />
               <span className="mono" style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
-                Venue
+                Venue & Contact
               </span>
             </div>
           </Reveal>
 
           <Reveal delay={0.1}>
-            <Glass hover={false} className="glass-border" style={{ padding: "56px 52px", overflow: "hidden" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 56, alignItems: "center" }}>
+            <h2 className="serif" style={{
+              fontSize: "clamp(36px, 5.5vw, 58px)",
+              fontWeight: 400, lineHeight: 1.1,
+              letterSpacing: "-0.03em",
+              marginBottom: 64,
+            }}>
+              Where to <em style={{ fontStyle: "italic", color: "#818cf8" }}>find us</em>
+            </h2>
+          </Reveal>
+
+          {/* Venue Info + Map */}
+          <Reveal delay={0.15}>
+            <Glass hover={false} className="glass-border" style={{ padding: "56px 52px", overflow: "hidden", marginBottom: 48 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "start" }}>
                 <div>
-                  <h2 className="serif" style={{
-                    fontSize: "clamp(34px, 5vw, 52px)",
-                    fontWeight: 400, fontStyle: "italic", marginBottom: 24,
-                    lineHeight: 1.1,
+                  <h3 className="serif" style={{
+                    fontSize: "clamp(28px, 4vw, 42px)",
+                    fontWeight: 400, fontStyle: "italic", marginBottom: 20,
+                    lineHeight: 1.15,
                   }}>
-                    Join us in<br />Raleigh-Durham.
-                  </h2>
+                    Northwestern Mutual
+                  </h3>
                   <p style={{
-                    fontSize: 18, color: "rgba(255,255,255,0.55)",
-                    lineHeight: 1.8, marginBottom: 32,
+                    fontSize: 18, color: "rgba(255,255,255,0.7)",
+                    lineHeight: 1.7, marginBottom: 8,
                   }}>
-                    Exact venue details will be shared upon registration.
-                    Located in the heart of the Triangle area with easy access
-                    and free parking.
+                    1201 Edwards Mill Road
                   </p>
+                  <p style={{
+                    fontSize: 18, color: "rgba(255,255,255,0.7)",
+                    lineHeight: 1.7, marginBottom: 32,
+                  }}>
+                    Raleigh, NC 27607
+                  </p>
+
                   <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                     {[
                       { label: "WiFi", detail: "High-speed provided" },
@@ -1255,36 +1386,78 @@ export default function EventPage() {
                       </div>
                     ))}
                   </div>
+
+                  <MagneticWrap strength={0.15}>
+                    <motion.a
+                      href="https://maps.google.com/?q=1201+Edwards+Mill+Road+Raleigh+NC+27607"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.04 }}
+                      whileTap={{ scale: 0.96 }}
+                      style={{
+                        display: "inline-flex", alignItems: "center", gap: 10,
+                        marginTop: 32, padding: "14px 32px", borderRadius: 100,
+                        background: "rgba(99,102,241,0.12)",
+                        border: "1px solid rgba(99,102,241,0.25)",
+                        color: "#fff", fontSize: 15,
+                        fontFamily: "'Syne', sans-serif", fontWeight: 600,
+                        textDecoration: "none", cursor: "pointer",
+                      }}
+                    >
+                      📍 Get Directions
+                    </motion.a>
+                  </MagneticWrap>
                 </div>
 
-                {/* Map placeholder / visual */}
+                {/* Google Maps embed */}
                 <div style={{
                   borderRadius: 20, overflow: "hidden",
-                  background: "rgba(255,255,255,0.03)",
                   border: "1px solid rgba(255,255,255,0.06)",
-                  aspectRatio: "1", display: "flex",
-                  alignItems: "center", justifyContent: "center",
-                  position: "relative",
+                  aspectRatio: "1", minHeight: 360,
                 }}>
-                  <div style={{
-                    position: "absolute", inset: 0,
-                    background: "radial-gradient(circle at 60% 40%, rgba(99,102,241,0.08), transparent 60%)",
-                  }} />
-                  <div style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
-                    <div style={{
-                      fontSize: 56, marginBottom: 16, opacity: 0.6,
-                      animation: "float 6s ease-in-out infinite",
-                    }}>📍</div>
-                    <p className="serif" style={{
-                      fontSize: 28, fontStyle: "italic", color: "rgba(255,255,255,0.7)",
-                      marginBottom: 8,
-                    }}>RDU Area</p>
-                    <p className="mono" style={{
-                      fontSize: 13, color: "rgba(255,255,255,0.35)",
-                      letterSpacing: "0.08em",
-                    }}>RALEIGH-DURHAM, NC</p>
-                  </div>
+                  <iframe
+                    title="Northwestern Mutual - Raleigh"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3237.1!2d-78.7146!3d35.8026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTIwMSBFZHdhcmRzIE1pbGwgUmQsIFJhbGVpZ2gsIE5DIDI3NjA3!5e0!3m2!1sen!2sus!4v1"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, filter: "invert(0.9) hue-rotate(180deg) brightness(0.7) contrast(1.2)", minHeight: 360 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
                 </div>
+              </div>
+            </Glass>
+          </Reveal>
+
+          {/* Contact Form */}
+          <Reveal delay={0.25}>
+            <Glass hover={false} className="glass-border" style={{ padding: "56px 52px", overflow: "hidden" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "start" }}>
+                <div>
+                  <h3 className="serif" style={{
+                    fontSize: "clamp(28px, 4vw, 42px)",
+                    fontWeight: 400, fontStyle: "italic", marginBottom: 20,
+                    lineHeight: 1.15,
+                  }}>
+                    Get in <em style={{ color: "#34d399" }}>touch</em>
+                  </h3>
+                  <p style={{
+                    fontSize: 18, color: "rgba(255,255,255,0.55)",
+                    lineHeight: 1.8, marginBottom: 20,
+                  }}>
+                    Have questions about the workshop, sponsorship, or anything else?
+                    Drop us a line and we'll get back to you.
+                  </p>
+                  <p className="mono" style={{
+                    fontSize: 14, color: "rgba(255,255,255,0.4)",
+                    letterSpacing: "0.06em",
+                  }}>
+                    marqueso@blacksintechnology.com
+                  </p>
+                </div>
+
+                <ContactForm />
               </div>
             </Glass>
           </Reveal>
