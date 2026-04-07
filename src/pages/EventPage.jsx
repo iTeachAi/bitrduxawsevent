@@ -1430,35 +1430,45 @@ export default function EventPage() {
             </Glass>
           </Reveal>
 
-          {/* Contact Form */}
+          {/* Contact */}
           <Reveal delay={0.25}>
-            <Glass hover={false} className="glass-border" style={{ padding: "56px 52px", overflow: "hidden" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "start" }}>
-                <div>
-                  <h3 className="serif" style={{
-                    fontSize: "clamp(28px, 4vw, 42px)",
-                    fontWeight: 400, fontStyle: "italic", marginBottom: 20,
-                    lineHeight: 1.15,
-                  }}>
-                    Get in <em style={{ color: "#34d399" }}>touch</em>
-                  </h3>
-                  <p style={{
-                    fontSize: 18, color: "rgba(255,255,255,0.55)",
-                    lineHeight: 1.8, marginBottom: 20,
-                  }}>
-                    Have questions about the workshop, sponsorship, or anything else?
-                    Drop us a line and we'll get back to you.
-                  </p>
-                  <p className="mono" style={{
-                    fontSize: 14, color: "rgba(255,255,255,0.4)",
-                    letterSpacing: "0.06em",
-                  }}>
-                    marqueso@blacksintechnology.org
-                  </p>
-                </div>
-
-                <ContactForm />
-              </div>
+            <Glass hover={false} className="glass-border" style={{ padding: "56px 52px", overflow: "hidden", textAlign: "center" }}>
+              <h3 className="serif" style={{
+                fontSize: "clamp(28px, 4vw, 42px)",
+                fontWeight: 400, fontStyle: "italic", marginBottom: 20,
+                lineHeight: 1.15,
+              }}>
+                Get in <em style={{ color: "#34d399" }}>touch</em>
+              </h3>
+              <p style={{
+                fontSize: 18, color: "rgba(255,255,255,0.55)",
+                lineHeight: 1.8, marginBottom: 32, maxWidth: 540, margin: "0 auto 32px",
+              }}>
+                Have questions about the workshop, sponsorship, or anything else? Reach out to us directly.
+              </p>
+              <motion.a
+                href="mailto:marqueso@blacksintechnology.org?subject=BIT%20RDU%20Workshop%20Inquiry"
+                whileHover={{ scale: 1.06, boxShadow: "0 0 40px rgba(52,211,153,0.35)" }}
+                whileTap={{ scale: 0.97 }}
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: 12,
+                  padding: "18px 48px", borderRadius: 999,
+                  background: "linear-gradient(135deg, #34d399, #059669)",
+                  color: "#000", fontWeight: 700, fontSize: 18,
+                  fontFamily: "'Syne', sans-serif",
+                  textDecoration: "none", letterSpacing: "0.02em",
+                  cursor: "pointer", border: "none",
+                }}
+              >
+                <Mail size={20} />
+                Contact Us
+              </motion.a>
+              <p className="mono" style={{
+                fontSize: 14, color: "rgba(255,255,255,0.4)",
+                letterSpacing: "0.06em", marginTop: 20,
+              }}>
+                marqueso@blacksintechnology.org
+              </p>
             </Glass>
           </Reveal>
         </div>
