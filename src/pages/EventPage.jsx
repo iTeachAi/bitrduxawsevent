@@ -162,7 +162,7 @@ function FloatingGeometry() {
 }
 
 /* ══════════════════════════════════════════
-   MAGNETIC HOVER — PeachWeb-style magnetic button
+   MAGNETIC HOVER
    ══════════════════════════════════════════ */
 function MagneticWrap({ children, strength = 0.3 }) {
   const ref = useRef(null);
@@ -195,7 +195,7 @@ function MagneticWrap({ children, strength = 0.3 }) {
 }
 
 /* ══════════════════════════════════════════
-   TEXT REVEAL — Character-by-character stagger
+   TEXT REVEAL
    ══════════════════════════════════════════ */
 function TextReveal({ text, className = "", style = {}, delay = 0, tag = "span" }) {
   const ref = useRef(null);
@@ -233,7 +233,7 @@ function TextReveal({ text, className = "", style = {}, delay = 0, tag = "span" 
 }
 
 /* ══════════════════════════════════════════
-   WATERMARK — PeachWeb-style oversized bg text
+   WATERMARK
    ══════════════════════════════════════════ */
 function Watermark({ text, style = {} }) {
   const ref = useRef(null);
@@ -265,7 +265,7 @@ function Watermark({ text, style = {} }) {
 }
 
 /* ══════════════════════════════════════════
-   REVEAL — Scroll-triggered animations
+   REVEAL
    ══════════════════════════════════════════ */
 function Reveal({ children, className = "", delay = 0, y = 50 }) {
   const ref = useRef(null);
@@ -284,7 +284,7 @@ function Reveal({ children, className = "", delay = 0, y = 50 }) {
 }
 
 /* ══════════════════════════════════════════
-   GLASS PANEL — Frosted glass component
+   GLASS PANEL
    ══════════════════════════════════════════ */
 function Glass({ children, style = {}, hover = true, className = "" }) {
   return (
@@ -307,173 +307,7 @@ function Glass({ children, style = {}, hover = true, className = "" }) {
 }
 
 /* ══════════════════════════════════════════
-   SCROLL-TO UTIL
-   ══════════════════════════════════════════ */
-function scrollToSection(id) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-/* ══════════════════════════════════════════
-   ANIMATED PROGRESS LINE
-   ══════════════════════════════════════════ */
-function ScrollProgress() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-  return (
-    <motion.div
-      style={{
-        position: "fixed", top: 0, left: 0, right: 0, height: 2,
-        background: "linear-gradient(90deg, #6366f1, #06b6d4, #34d399)",
-        transformOrigin: "0%", scaleX, zIndex: 200,
-      }}
-    />
-  );
-}
-
-/* ══════════════════════════════════════════
-   NAV BAR — PeachWeb pill-style nav
-   ══════════════════════════════════════════ */
-function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const h = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", h);
-    return () => window.removeEventListener("scroll", h);
-  }, []);
-
-  const navLinks = [
-    { label: "About", id: "about" },
-    { label: "Experience", id: "experience" },
-    { label: "Details", id: "details" },
-  ];
-
-  return (
-    <motion.nav
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-      style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        padding: "16px 32px",
-        display: "flex", justifyContent: "space-between", alignItems: "center",
-        background: scrolled ? "rgba(4,4,14,0.85)" : "transparent",
-        backdropFilter: scrolled ? "blur(40px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(255,255,255,0.04)" : "none",
-        transition: "all 0.6s cubic-bezier(0.16,1,0.3,1)",
-      }}
-    >
-      {/* Logo */}
-      <MagneticWrap strength={0.15}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <div style={{
-            width: 38, height: 38, borderRadius: 12,
-            background: "linear-gradient(135deg, #6366f1, #06b6d4)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 11, color: "#fff",
-            letterSpacing: "-0.02em",
-          }}>BIT</div>
-          <span style={{
-            fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 14,
-            color: "rgba(255,255,255,0.95)", letterSpacing: "-0.02em",
-          }}>Blacks in Technology RDU</span>
-        </div>
-      </MagneticWrap>
-
-      {/* Center pill nav */}
-      <div style={{
-        display: "flex", alignItems: "center", gap: 4,
-        padding: "6px 8px", borderRadius: 100,
-        background: "rgba(255,255,255,0.04)",
-        border: "1px solid rgba(255,255,255,0.06)",
-        backdropFilter: "blur(20px)",
-      }}>
-        {navLinks.map((link) => (
-          <MagneticWrap key={link.id} strength={0.12}>
-            <motion.button
-              onClick={() => scrollToSection(link.id)}
-              whileHover={{ backgroundColor: "rgba(255,255,255,0.08)" }}
-              whileTap={{ scale: 0.95 }}
-              style={{
-                padding: "8px 20px", borderRadius: 100, border: "none",
-                background: "transparent", color: "rgba(255,255,255,0.6)",
-                fontSize: 13, fontFamily: "'Syne', sans-serif", fontWeight: 500,
-                cursor: "pointer", letterSpacing: "0.01em",
-                transition: "color 0.3s ease",
-              }}
-              onMouseEnter={(e) => e.target.style.color = "#fff"}
-              onMouseLeave={(e) => e.target.style.color = "rgba(255,255,255,0.6)"}
-            >{link.label}</motion.button>
-          </MagneticWrap>
-        ))}
-      </div>
-
-      {/* Register CTA */}
-      <MagneticWrap strength={0.2}>
-        <motion.a
-          href="https://www.eventbrite.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          whileHover={{ scale: 1.06, boxShadow: "0 0 30px rgba(99,102,241,0.3)" }}
-          whileTap={{ scale: 0.95 }}
-          style={{
-            padding: "10px 28px", borderRadius: 100,
-            background: "linear-gradient(135deg, rgba(99,102,241,0.15), rgba(6,182,212,0.1))",
-            border: "1px solid rgba(99,102,241,0.25)",
-            color: "#fff", fontSize: 13,
-            fontFamily: "'Syne', sans-serif", fontWeight: 600, cursor: "pointer",
-            backdropFilter: "blur(12px)", letterSpacing: "0.01em",
-            textDecoration: "none", display: "inline-block",
-          }}
-        >Register</motion.a>
-      </MagneticWrap>
-    </motion.nav>
-  );
-}
-
-/* ══════════════════════════════════════════
-   ANIMATED COUNTER / STAT
-   ══════════════════════════════════════════ */
-function StatNumber({ value, suffix = "", label }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!inView) return;
-    let start = 0;
-    const end = parseInt(value);
-    const dur = 1500;
-    const step = (end / dur) * 16;
-    const timer = setInterval(() => {
-      start += step;
-      if (start >= end) { setCount(end); clearInterval(timer); }
-      else setCount(Math.floor(start));
-    }, 16);
-    return () => clearInterval(timer);
-  }, [inView, value]);
-
-  return (
-    <div ref={ref} style={{ textAlign: "center" }}>
-      <div style={{
-        fontFamily: "'Instrument Serif', serif", fontSize: "clamp(48px, 7vw, 72px)",
-        fontWeight: 400, fontStyle: "italic",
-        background: "linear-gradient(135deg, #c7d2fe, #6366f1)",
-        WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-        backgroundClip: "text", lineHeight: 1,
-      }}>
-        {count}{suffix}
-      </div>
-      <p style={{ fontSize: 15, color: "rgba(255,255,255,0.5)", marginTop: 10,
-        fontFamily: "'Syne', sans-serif", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase" }}>
-        {label}
-      </p>
-    </div>
-  );
-}
-
-/* ══════════════════════════════════════════
-   HOVER CARD — PeachWeb-style tilt card
+   TILT CARD
    ══════════════════════════════════════════ */
 function TiltCard({ children, style = {}, className = "" }) {
   const ref = useRef(null);
@@ -513,6 +347,269 @@ function TiltCard({ children, style = {}, className = "" }) {
 }
 
 /* ══════════════════════════════════════════
+   SCROLL UTILS
+   ══════════════════════════════════════════ */
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  return (
+    <motion.div
+      style={{
+        position: "fixed", top: 0, left: 0, right: 0, height: 2,
+        background: "linear-gradient(90deg, #6366f1, #06b6d4, #34d399)",
+        transformOrigin: "0%", scaleX, zIndex: 200,
+      }}
+    />
+  );
+}
+
+/* ══════════════════════════════════════════
+   STAT COUNTER
+   ══════════════════════════════════════════ */
+function StatNumber({ value, suffix = "", label }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const end = parseInt(value);
+    const dur = 1500;
+    const step = (end / dur) * 16;
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= end) { setCount(end); clearInterval(timer); }
+      else setCount(Math.floor(start));
+    }, 16);
+    return () => clearInterval(timer);
+  }, [inView, value]);
+
+  return (
+    <div ref={ref} style={{ textAlign: "center" }}>
+      <div style={{
+        fontFamily: "'Instrument Serif', serif", fontSize: "clamp(48px, 7vw, 72px)",
+        fontWeight: 400, fontStyle: "italic",
+        background: "linear-gradient(135deg, #c7d2fe, #6366f1)",
+        WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
+        backgroundClip: "text", lineHeight: 1,
+      }}>
+        {count}{suffix}
+      </div>
+      <p style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", marginTop: 10,
+        fontFamily: "'Syne', sans-serif", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+        {label}
+      </p>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════
+   NAV BAR
+   ══════════════════════════════════════════ */
+function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const h = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", h);
+    return () => window.removeEventListener("scroll", h);
+  }, []);
+
+  const navLinks = [
+    { label: "Schedule", id: "schedule" },
+    { label: "About", id: "about" },
+    { label: "Venue", id: "venue" },
+    { label: "Register", id: "register" },
+  ];
+
+  return (
+    <motion.nav
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      style={{
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+        padding: "16px 32px",
+        display: "flex", justifyContent: "space-between", alignItems: "center",
+        background: scrolled ? "rgba(4,4,14,0.85)" : "transparent",
+        backdropFilter: scrolled ? "blur(40px)" : "none",
+        borderBottom: scrolled ? "1px solid rgba(255,255,255,0.04)" : "none",
+        transition: "all 0.6s cubic-bezier(0.16,1,0.3,1)",
+      }}
+    >
+      <MagneticWrap strength={0.15}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{
+            width: 38, height: 38, borderRadius: 12,
+            background: "linear-gradient(135deg, #6366f1, #06b6d4)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 11, color: "#fff",
+            letterSpacing: "-0.02em",
+          }}>BIT</div>
+          <span style={{
+            fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 14,
+            color: "rgba(255,255,255,0.95)", letterSpacing: "-0.02em",
+          }}>Blacks in Technology RDU</span>
+        </div>
+      </MagneticWrap>
+
+      <div style={{
+        display: "flex", alignItems: "center", gap: 4,
+        padding: "6px 8px", borderRadius: 100,
+        background: "rgba(255,255,255,0.04)",
+        border: "1px solid rgba(255,255,255,0.06)",
+        backdropFilter: "blur(20px)",
+      }}>
+        {navLinks.map((link) => (
+          <MagneticWrap key={link.id} strength={0.12}>
+            <motion.button
+              onClick={() => scrollToSection(link.id)}
+              whileHover={{ backgroundColor: "rgba(255,255,255,0.08)" }}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                padding: "8px 20px", borderRadius: 100, border: "none",
+                background: "transparent", color: "rgba(255,255,255,0.6)",
+                fontSize: 13, fontFamily: "'Syne', sans-serif", fontWeight: 500,
+                cursor: "pointer", letterSpacing: "0.01em",
+                transition: "color 0.3s ease",
+              }}
+              onMouseEnter={(e) => e.target.style.color = "#fff"}
+              onMouseLeave={(e) => e.target.style.color = "rgba(255,255,255,0.6)"}
+            >{link.label}</motion.button>
+          </MagneticWrap>
+        ))}
+      </div>
+
+      <MagneticWrap strength={0.2}>
+        <motion.a
+          href="https://www.eventbrite.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ scale: 1.06, boxShadow: "0 0 30px rgba(99,102,241,0.3)" }}
+          whileTap={{ scale: 0.95 }}
+          style={{
+            padding: "10px 28px", borderRadius: 100,
+            background: "linear-gradient(135deg, rgba(99,102,241,0.15), rgba(6,182,212,0.1))",
+            border: "1px solid rgba(99,102,241,0.25)",
+            color: "#fff", fontSize: 13,
+            fontFamily: "'Syne', sans-serif", fontWeight: 600, cursor: "pointer",
+            backdropFilter: "blur(12px)", letterSpacing: "0.01em",
+            textDecoration: "none", display: "inline-block",
+          }}
+        >Get Tickets</motion.a>
+      </MagneticWrap>
+    </motion.nav>
+  );
+}
+
+/* ══════════════════════════════════════════
+   TIMELINE ITEM — Event schedule component
+   ══════════════════════════════════════════ */
+function TimelineItem({ time, title, desc, accent, index, isLast }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: -40 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 0.8, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
+      style={{ display: "flex", gap: 32, position: "relative" }}
+    >
+      {/* Timeline spine */}
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", minWidth: 24 }}>
+        <motion.div
+          animate={inView ? {
+            boxShadow: [`0 0 0px ${accent}`, `0 0 20px ${accent}80`, `0 0 0px ${accent}`],
+          } : {}}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+          style={{
+            width: 14, height: 14, borderRadius: "50%",
+            background: accent,
+            border: `2px solid ${accent}`,
+            flexShrink: 0, position: "relative", zIndex: 2,
+          }}
+        />
+        {!isLast && (
+          <motion.div
+            initial={{ scaleY: 0 }}
+            animate={inView ? { scaleY: 1 } : {}}
+            transition={{ duration: 0.8, delay: index * 0.12 + 0.3 }}
+            style={{
+              width: 1, flex: 1,
+              background: `linear-gradient(to bottom, ${accent}40, transparent)`,
+              transformOrigin: "top",
+            }}
+          />
+        )}
+      </div>
+
+      {/* Content */}
+      <div style={{ paddingBottom: isLast ? 0 : 56, flex: 1 }}>
+        <span className="mono" style={{
+          fontSize: 14, color: accent, letterSpacing: "0.06em",
+          fontWeight: 500, display: "block", marginBottom: 8,
+        }}>{time}</span>
+        <h3 style={{
+          fontSize: 22, fontWeight: 700, marginBottom: 8,
+          letterSpacing: "-0.02em", color: "rgba(255,255,255,0.95)",
+          fontFamily: "'Syne', sans-serif",
+        }}>{title}</h3>
+        <p style={{
+          fontSize: 17, color: "rgba(255,255,255,0.5)", lineHeight: 1.7,
+          maxWidth: 440,
+        }}>{desc}</p>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ══════════════════════════════════════════
+   EVENT INFO PILL — Compact info display
+   ══════════════════════════════════════════ */
+function InfoPill({ icon, label, value }) {
+  return (
+    <MagneticWrap strength={0.1}>
+      <motion.div
+        whileHover={{ y: -4, borderColor: "rgba(99,102,241,0.25)" }}
+        className="glass-border"
+        style={{
+          display: "flex", alignItems: "center", gap: 16,
+          padding: "20px 28px", borderRadius: 20,
+          background: "rgba(255,255,255,0.025)",
+          backdropFilter: "blur(20px)",
+          border: "1px solid rgba(255,255,255,0.06)",
+          transition: "border-color 0.4s ease",
+        }}
+      >
+        <div style={{
+          fontSize: 24, width: 44, height: 44,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          borderRadius: 14,
+          background: "rgba(99,102,241,0.08)",
+        }}>{icon}</div>
+        <div>
+          <p className="mono" style={{
+            fontSize: 12, color: "rgba(255,255,255,0.4)",
+            letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 4,
+          }}>{label}</p>
+          <p style={{
+            fontSize: 17, fontWeight: 600, color: "rgba(255,255,255,0.9)",
+            fontFamily: "'Syne', sans-serif",
+          }}>{value}</p>
+        </div>
+      </motion.div>
+    </MagneticWrap>
+  );
+}
+
+/* ══════════════════════════════════════════
    MAIN PAGE
    ══════════════════════════════════════════ */
 export default function EventPage() {
@@ -521,11 +618,13 @@ export default function EventPage() {
   const heroScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.92]);
   const heroY = useTransform(scrollYProgress, [0, 0.15], [0, 80]);
 
-  const experienceItems = [
-    { num: "01", title: "Live Demos", desc: "Watch AI agents built in real-time before your eyes.", accent: "#818cf8" },
-    { num: "02", title: "Build Your Agent", desc: "Go from zero to a working AI agent in one session.", accent: "#06b6d4" },
-    { num: "03", title: "AWS Credits", desc: "Free credits and accounts to experiment without limits.", accent: "#34d399" },
-    { num: "04", title: "Industry Skills", desc: "Learn the exact tools professional AI engineers use.", accent: "#f472b6" },
+  const schedule = [
+    { time: "5:30 PM", title: "Doors Open & Check-in", desc: "Grab your badge, meet fellow attendees, and get set up with your AWS environment.", accent: "#818cf8" },
+    { time: "6:00 PM", title: "Welcome & Keynote", desc: "Opening remarks from Blacks in Technology RDU. Why AI agents matter now.", accent: "#06b6d4" },
+    { time: "6:20 PM", title: "Live Demo: AI Agent from Scratch", desc: "Watch an AI agent get built live using AWS Bedrock — from prompt to deployment.", accent: "#34d399" },
+    { time: "6:45 PM", title: "Hands-On Workshop Begins", desc: "Your turn. Build your own AI agent step-by-step with guided instruction and AWS credits.", accent: "#f472b6" },
+    { time: "7:30 PM", title: "Show & Tell + Q&A", desc: "Demo what you built, ask questions, and learn from each other's approaches.", accent: "#f59e0b" },
+    { time: "8:00 PM", title: "Networking & Close", desc: "Connect with sponsors, organizers, and fellow builders. Refreshments provided.", accent: "#818cf8" },
   ];
 
   const audiences = [
@@ -563,10 +662,6 @@ export default function EventPage() {
           33% { transform: translate(30px, -20px) scale(1.05); }
           66% { transform: translate(-20px, 15px) scale(0.95); }
         }
-        @keyframes borderRotate {
-          from { --angle: 0deg; }
-          to { --angle: 360deg; }
-        }
         @keyframes pulse-ring {
           0% { transform: scale(1); opacity: 0.6; }
           100% { transform: scale(2.5); opacity: 0; }
@@ -587,9 +682,9 @@ export default function EventPage() {
           0%, 100% { opacity: 0.4; }
           50% { opacity: 0.8; }
         }
-        @keyframes line-draw {
-          from { stroke-dashoffset: 1000; }
-          to { stroke-dashoffset: 0; }
+        @keyframes countdown-pulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.03); }
         }
 
         .grain-overlay::after {
@@ -607,9 +702,7 @@ export default function EventPage() {
         .serif { font-family: 'Instrument Serif', serif; }
         .mono { font-family: 'DM Mono', monospace; }
 
-        .glass-border {
-          position: relative;
-        }
+        .glass-border { position: relative; }
         .glass-border::before {
           content: '';
           position: absolute;
@@ -627,14 +720,6 @@ export default function EventPage() {
           background: linear-gradient(90deg, transparent, rgba(99,102,241,0.15), transparent);
           background-size: 200% 100%;
           animation: shimmer 3s ease-in-out infinite;
-        }
-
-        .hover-lift {
-          transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.6s ease;
-        }
-        .hover-lift:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 40px 80px -15px rgba(99,102,241,0.18), 0 20px 40px -20px rgba(0,0,0,0.4);
         }
 
         .cta-btn {
@@ -679,7 +764,7 @@ export default function EventPage() {
       <Nav />
 
       {/* ═══════════════════════════════════
-          SECTION 1 — HERO
+          HERO — Event-style with date & location prominent
          ═══════════════════════════════════ */}
       <motion.section
         style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
@@ -689,14 +774,13 @@ export default function EventPage() {
           position: "relative", minHeight: "100vh",
           display: "flex", flexDirection: "column",
           alignItems: "center", justifyContent: "center",
-          padding: "140px 32px 100px",
+          padding: "140px 32px 80px",
           textAlign: "center", zIndex: 2,
         }}>
-          {/* PeachWeb-style watermark */}
-          <Watermark text="Build" style={{ top: "15%", left: "-5%" }} />
-          <Watermark text="AI" style={{ bottom: "20%", right: "-3%" }} />
+          <Watermark text="Event" style={{ top: "15%", left: "-5%" }} />
+          <Watermark text="2026" style={{ bottom: "20%", right: "-3%" }} />
 
-          {/* Orbiting ring */}
+          {/* Orbiting rings */}
           <div style={{
             position: "absolute", top: "50%", left: "50%",
             width: 320, height: 320,
@@ -713,8 +797,6 @@ export default function EventPage() {
               position: "absolute", top: -4, left: "50%", marginLeft: -4,
             }} />
           </div>
-
-          {/* Second orbiting ring — counter-direction */}
           <div style={{
             position: "absolute", top: "50%", left: "50%",
             width: 500, height: 500,
@@ -732,7 +814,7 @@ export default function EventPage() {
             }} />
           </div>
 
-          {/* Date pill */}
+          {/* Event type pill */}
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -742,7 +824,7 @@ export default function EventPage() {
               padding: "10px 26px", borderRadius: 100,
               background: "rgba(255,255,255,0.03)",
               border: "1px solid rgba(255,255,255,0.08)",
-              marginBottom: 48, position: "relative", zIndex: 2,
+              marginBottom: 40, position: "relative", zIndex: 2,
             }}
           >
             <div style={{
@@ -750,20 +832,20 @@ export default function EventPage() {
               boxShadow: "0 0 12px #34d399",
               animation: "glow-pulse 2s ease-in-out infinite",
             }} />
-            <span className="mono" style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", letterSpacing: "0.05em" }}>
-              MAY 4, 2026 — 6:00 PM
+            <span className="mono" style={{ fontSize: 14, color: "rgba(255,255,255,0.65)", letterSpacing: "0.05em" }}>
+              FREE HANDS-ON WORKSHOP
             </span>
           </motion.div>
 
-          {/* Main headline with character-by-character reveal */}
+          {/* Main headline */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3, delay: 0.5 }}
-            style={{ position: "relative", zIndex: 2, marginBottom: 32 }}
+            style={{ position: "relative", zIndex: 2, marginBottom: 28 }}
           >
             <h1 className="serif" style={{
-              fontSize: "clamp(52px, 11vw, 130px)",
+              fontSize: "clamp(48px, 10vw, 120px)",
               fontWeight: 400,
               lineHeight: 0.95,
               letterSpacing: "-0.04em",
@@ -809,10 +891,10 @@ export default function EventPage() {
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 1.2, delay: 1.0 }}
             style={{
-              fontSize: "clamp(17px, 2.2vw, 21px)",
+              fontSize: "clamp(18px, 2.2vw, 22px)",
               color: "rgba(255,255,255,0.55)",
               maxWidth: 520, lineHeight: 1.7,
-              marginBottom: 52, position: "relative", zIndex: 2,
+              marginBottom: 44, position: "relative", zIndex: 2,
               fontWeight: 400,
             }}
           >
@@ -820,11 +902,42 @@ export default function EventPage() {
             Build real AI agents using industry-grade tools.
           </motion.p>
 
+          {/* Event quick info row */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            style={{
+              display: "flex", gap: 32, flexWrap: "wrap", justifyContent: "center",
+              marginBottom: 48, position: "relative", zIndex: 2,
+            }}
+          >
+            {[
+              { icon: "📅", text: "May 4, 2026" },
+              { icon: "⏰", text: "6:00 – 8:00 PM" },
+              { icon: "📍", text: "Raleigh-Durham, NC" },
+              { icon: "🎟️", text: "Free Admission" },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -2 }}
+                style={{
+                  display: "flex", alignItems: "center", gap: 10,
+                  fontSize: 16, color: "rgba(255,255,255,0.6)",
+                  fontWeight: 500,
+                }}
+              >
+                <span style={{ fontSize: 18 }}>{item.icon}</span>
+                <span>{item.text}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+
           {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.3 }}
+            transition={{ duration: 0.8, delay: 1.4 }}
             style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center", position: "relative", zIndex: 2 }}
           >
             <MagneticWrap strength={0.15}>
@@ -836,31 +949,31 @@ export default function EventPage() {
                 whileTap={{ scale: 0.96 }}
                 className="cta-btn"
                 style={{
-                  padding: "18px 44px", borderRadius: 100, border: "none",
+                  padding: "20px 52px", borderRadius: 100, border: "none",
                   background: "linear-gradient(135deg, #6366f1, #06b6d4)",
-                  color: "#fff", fontSize: 16, fontWeight: 700, cursor: "pointer",
+                  color: "#fff", fontSize: 18, fontWeight: 700, cursor: "pointer",
                   fontFamily: "'Syne', sans-serif", letterSpacing: "-0.01em",
                   boxShadow: "0 0 40px rgba(99,102,241,0.3), 0 0 80px rgba(6,182,212,0.12)",
                   textDecoration: "none", display: "inline-block", position: "relative",
                 }}
               >
-                Reserve Your Spot →
+                Get Your Free Ticket →
               </motion.a>
             </MagneticWrap>
             <MagneticWrap strength={0.15}>
               <motion.button
-                onClick={() => scrollToSection("about")}
+                onClick={() => scrollToSection("schedule")}
                 whileHover={{ scale: 1.04, borderColor: "rgba(255,255,255,0.2)" }}
                 whileTap={{ scale: 0.96 }}
                 style={{
-                  padding: "18px 44px", borderRadius: 100,
+                  padding: "20px 44px", borderRadius: 100,
                   border: "1px solid rgba(255,255,255,0.1)",
                   background: "rgba(255,255,255,0.03)", color: "rgba(255,255,255,0.7)",
-                  fontSize: 16, fontWeight: 500, cursor: "pointer",
+                  fontSize: 18, fontWeight: 500, cursor: "pointer",
                   fontFamily: "'Syne', sans-serif", backdropFilter: "blur(12px)",
                 }}
               >
-                Learn More ↓
+                View Schedule ↓
               </motion.button>
             </MagneticWrap>
           </motion.div>
@@ -869,10 +982,10 @@ export default function EventPage() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.6 }}
+            transition={{ duration: 0.8, delay: 1.7 }}
             className="mono"
             style={{
-              marginTop: 64, fontSize: 13,
+              marginTop: 56, fontSize: 13,
               color: "rgba(255,255,255,0.35)",
               letterSpacing: "0.12em", textTransform: "uppercase",
               position: "relative", zIndex: 2,
@@ -885,7 +998,7 @@ export default function EventPage() {
           <motion.div
             animate={{ y: [0, 14, 0] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            style={{ position: "absolute", bottom: 40, zIndex: 2 }}
+            style={{ position: "absolute", bottom: 32, zIndex: 2 }}
           >
             <div style={{
               width: 1, height: 56,
@@ -895,79 +1008,154 @@ export default function EventPage() {
         </div>
       </motion.section>
 
-      {/* Divider */}
+      {/* ═══════════════════════════════════
+          EVENT INFO BAR — Quick-glance details
+         ═══════════════════════════════════ */}
+      <section style={{ position: "relative", padding: "0 32px 80px", zIndex: 2, marginTop: -20 }}>
+        <div style={{
+          maxWidth: 1100, margin: "0 auto",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+          gap: 16,
+        }}>
+          <Reveal delay={0}><InfoPill icon="📅" label="Date" value="Sunday, May 4, 2026" /></Reveal>
+          <Reveal delay={0.08}><InfoPill icon="🕐" label="Time" value="5:30 PM – 8:00 PM" /></Reveal>
+          <Reveal delay={0.16}><InfoPill icon="📍" label="Location" value="Raleigh-Durham, NC" /></Reveal>
+          <Reveal delay={0.24}><InfoPill icon="💰" label="Price" value="Free + AWS Credits" /></Reveal>
+        </div>
+      </section>
+
       <div className="section-divider" />
 
       {/* ═══════════════════════════════════
-          SECTION 2 — WHAT THIS IS
+          EVENT SCHEDULE — Timeline layout
          ═══════════════════════════════════ */}
-      <section id="about" style={{ position: "relative", padding: "160px 32px 120px", zIndex: 2 }}>
+      <section id="schedule" style={{ position: "relative", padding: "140px 32px", zIndex: 2 }}>
+        <Watermark text="Schedule" style={{ top: "5%", right: "-8%" }} />
+        <div style={{ maxWidth: 700, margin: "0 auto" }}>
+          <Reveal>
+            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
+              <div className="shimmer-line" style={{ width: 40, height: 2 }} />
+              <span className="mono" style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                Event Schedule
+              </span>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <h2 className="serif" style={{
+              fontSize: "clamp(38px, 5.5vw, 64px)",
+              fontWeight: 400, lineHeight: 1.1,
+              letterSpacing: "-0.03em",
+              marginBottom: 64,
+            }}>
+              How the <em style={{ fontStyle: "italic", color: "#818cf8" }}>evening</em> unfolds
+            </h2>
+          </Reveal>
+
+          {/* Timeline */}
+          <div style={{ paddingLeft: 8 }}>
+            {schedule.map((item, i) => (
+              <TimelineItem
+                key={i}
+                index={i}
+                time={item.time}
+                title={item.title}
+                desc={item.desc}
+                accent={item.accent}
+                isLast={i === schedule.length - 1}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
+      {/* ═══════════════════════════════════
+          ABOUT — What this event is
+         ═══════════════════════════════════ */}
+      <section id="about" style={{ position: "relative", padding: "140px 32px", zIndex: 2 }}>
         <Watermark text="Workshop" style={{ top: "5%", right: "-8%" }} />
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <Reveal>
             <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
               <div className="shimmer-line" style={{ width: 40, height: 2 }} />
-              <span className="mono" style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
-                What This Is
+              <span className="mono" style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                About the Event
               </span>
             </div>
           </Reveal>
 
-          <Reveal delay={0.1}>
-            <h2 className="serif" style={{
-              fontSize: "clamp(36px, 5.5vw, 64px)",
-              fontWeight: 400, lineHeight: 1.1,
-              letterSpacing: "-0.03em",
-              marginBottom: 24, maxWidth: 700,
-            }}>
-              Not a lecture.<br />
-              A <em style={{ fontStyle: "italic", color: "#818cf8" }}>launchpad</em>.
-            </h2>
-          </Reveal>
-
-          <Reveal delay={0.2}>
-            <p style={{
-              fontSize: 18, color: "rgba(255,255,255,0.5)",
-              maxWidth: 540, lineHeight: 1.8, marginBottom: 72,
-            }}>
-              Build functional AI agents from scratch using AWS tools — with real cloud
-              credits and expert guidance every step of the way.
-            </p>
-          </Reveal>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20 }}>
-            {[
-              { title: "Hands-On Workshop", desc: "Write real code. Build real agents. No passive learning.", icon: "⬡" },
-              { title: "Real-World Applications", desc: "Learn patterns powering AI systems at scale.", icon: "◈" },
-              { title: "Guided Experience", desc: "Step-by-step, from environment setup to deployment.", icon: "△" },
-            ].map((item, i) => (
-              <Reveal key={i} delay={0.15 * i}>
-                <TiltCard
-                  className="glass-border"
-                  style={{
-                    padding: "40px 34px",
-                    borderRadius: 28,
-                    background: "rgba(255,255,255,0.02)",
-                    backdropFilter: "blur(20px)",
-                    cursor: "default",
-                    height: "100%",
-                  }}
-                >
-                  <motion.div
-                    initial={{ scale: 1 }}
-                    whileHover={{ scale: 1.15, rotate: 5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    style={{
-                      fontSize: 32, marginBottom: 24, color: "#818cf8",
-                      fontFamily: "'Instrument Serif', serif", fontStyle: "italic",
-                      display: "inline-block",
-                    }}
-                  >{item.icon}</motion.div>
-                  <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 12, letterSpacing: "-0.02em" }}>{item.title}</h3>
-                  <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}>{item.desc}</p>
-                </TiltCard>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }}>
+            <div>
+              <Reveal delay={0.1}>
+                <h2 className="serif" style={{
+                  fontSize: "clamp(36px, 5.5vw, 58px)",
+                  fontWeight: 400, lineHeight: 1.1,
+                  letterSpacing: "-0.03em",
+                  marginBottom: 28,
+                }}>
+                  Not a lecture.<br />
+                  A <em style={{ fontStyle: "italic", color: "#818cf8" }}>launchpad</em>.
+                </h2>
               </Reveal>
-            ))}
+
+              <Reveal delay={0.2}>
+                <p style={{
+                  fontSize: 18, color: "rgba(255,255,255,0.55)",
+                  lineHeight: 1.8, marginBottom: 36,
+                }}>
+                  Build functional AI agents from scratch using AWS tools — with real cloud
+                  credits and expert guidance every step of the way. Leave with a working project
+                  and the skills to keep building.
+                </p>
+              </Reveal>
+
+              <Reveal delay={0.3}>
+                <div style={{ display: "flex", gap: 36 }}>
+                  <StatNumber value="2" suffix="hr" label="Workshop" />
+                  <StatNumber value="100" suffix="%" label="Hands-On" />
+                  <StatNumber value="0" suffix="$" label="Cost" />
+                </div>
+              </Reveal>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+              {[
+                { title: "Hands-On Workshop", desc: "Write real code. Build real agents. No passive learning.", icon: "⬡" },
+                { title: "Real-World Applications", desc: "Learn patterns powering AI systems at scale.", icon: "◈" },
+                { title: "Guided Experience", desc: "Step-by-step, from environment setup to deployment.", icon: "△" },
+              ].map((item, i) => (
+                <Reveal key={i} delay={0.15 * i + 0.1}>
+                  <TiltCard
+                    className="glass-border"
+                    style={{
+                      padding: "32px 28px",
+                      borderRadius: 24,
+                      background: "rgba(255,255,255,0.02)",
+                      backdropFilter: "blur(20px)",
+                      cursor: "default",
+                      display: "flex", gap: 20, alignItems: "flex-start",
+                    }}
+                  >
+                    <motion.div
+                      whileHover={{ scale: 1.15, rotate: 5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                      style={{
+                        fontSize: 28, color: "#818cf8",
+                        fontFamily: "'Instrument Serif', serif", fontStyle: "italic",
+                        flexShrink: 0, marginTop: 2,
+                      }}
+                    >{item.icon}</motion.div>
+                    <div>
+                      <h3 style={{ fontSize: 19, fontWeight: 700, marginBottom: 8, letterSpacing: "-0.02em" }}>{item.title}</h3>
+                      <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}>{item.desc}</p>
+                    </div>
+                  </TiltCard>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -975,84 +1163,15 @@ export default function EventPage() {
       <div className="section-divider" />
 
       {/* ═══════════════════════════════════
-          SECTION 3 — WHAT YOU'LL EXPERIENCE
+          WHO SHOULD ATTEND
          ═══════════════════════════════════ */}
-      <section id="experience" style={{ position: "relative", padding: "160px 32px", zIndex: 2 }}>
-        <Watermark text="Experience" style={{ top: "8%", left: "-6%" }} />
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <Reveal>
-            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
-              <div className="shimmer-line" style={{ width: 40, height: 2 }} />
-              <span className="mono" style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
-                The Experience
-              </span>
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="serif" style={{
-              fontSize: "clamp(36px, 5.5vw, 64px)",
-              fontWeight: 400, lineHeight: 1.1, letterSpacing: "-0.03em",
-              marginBottom: 72, maxWidth: 600,
-            }}>
-              What you'll <em style={{ fontStyle: "italic", color: "#06b6d4" }}>walk away</em> with
-            </h2>
-          </Reveal>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: 18 }}>
-            {experienceItems.map((item, i) => (
-              <Reveal key={i} delay={0.12 * i}>
-                <TiltCard
-                  className="glass-border"
-                  style={{
-                    padding: "40px 30px",
-                    borderRadius: 28,
-                    background: "rgba(255,255,255,0.02)",
-                    backdropFilter: "blur(16px)",
-                    position: "relative",
-                    overflow: "hidden",
-                    cursor: "default",
-                    height: "100%",
-                  }}
-                >
-                  {/* Large faded number */}
-                  <span className="serif" style={{
-                    position: "absolute", top: 14, right: 18,
-                    fontSize: 80, fontWeight: 400, fontStyle: "italic",
-                    color: "rgba(255,255,255,0.025)", lineHeight: 1,
-                  }}>{item.num}</span>
-
-                  {/* Accent dot with glow */}
-                  <motion.div
-                    animate={{ boxShadow: [`0 0 16px ${item.accent}40`, `0 0 28px ${item.accent}70`, `0 0 16px ${item.accent}40`] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    style={{
-                      width: 10, height: 10, borderRadius: "50%",
-                      background: item.accent,
-                      marginBottom: 28,
-                    }}
-                  />
-
-                  <h3 style={{ fontSize: 19, fontWeight: 700, marginBottom: 12, letterSpacing: "-0.01em" }}>{item.title}</h3>
-                  <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}>{item.desc}</p>
-                </TiltCard>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div className="section-divider" />
-
-      {/* ═══════════════════════════════════
-          SECTION 4 — WHO SHOULD ATTEND
-         ═══════════════════════════════════ */}
-      <section style={{ position: "relative", padding: "160px 32px", zIndex: 2 }}>
+      <section style={{ position: "relative", padding: "140px 32px", zIndex: 2 }}>
         <Watermark text="For You" style={{ bottom: "10%", right: "-4%" }} />
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <Reveal>
             <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
               <div className="shimmer-line" style={{ width: 40, height: 2 }} />
-              <span className="mono" style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+              <span className="mono" style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
                 Who It's For
               </span>
             </div>
@@ -1067,7 +1186,7 @@ export default function EventPage() {
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
-            <p style={{ fontSize: 18, color: "rgba(255,255,255,0.5)", maxWidth: 500, lineHeight: 1.8, marginBottom: 64 }}>
+            <p style={{ fontSize: 18, color: "rgba(255,255,255,0.55)", maxWidth: 500, lineHeight: 1.8, marginBottom: 64 }}>
               Whether you've never written code or you're building side projects — there's a seat here.
             </p>
           </Reveal>
@@ -1093,8 +1212,8 @@ export default function EventPage() {
                       fontStyle: "italic", opacity: 0.8, display: "inline-block",
                     }}
                   >{a.icon}</motion.div>
-                  <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8, letterSpacing: "-0.01em" }}>{a.label}</h3>
-                  <p style={{ fontSize: 15, color: "rgba(255,255,255,0.45)" }}>{a.sub}</p>
+                  <h3 style={{ fontSize: 19, fontWeight: 700, marginBottom: 8, letterSpacing: "-0.01em" }}>{a.label}</h3>
+                  <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)" }}>{a.sub}</p>
                 </TiltCard>
               </Reveal>
             ))}
@@ -1105,55 +1224,85 @@ export default function EventPage() {
       <div className="section-divider" />
 
       {/* ═══════════════════════════════════
-          SECTION 5 — EVENT DETAILS
+          VENUE & LOCATION
          ═══════════════════════════════════ */}
-      <section id="details" style={{ position: "relative", padding: "160px 32px", zIndex: 2 }}>
-        <div style={{ maxWidth: 850, margin: "0 auto" }}>
+      <section id="venue" style={{ position: "relative", padding: "140px 32px", zIndex: 2 }}>
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <Reveal>
-            <Glass hover={false} className="glass-border" style={{ padding: "64px 52px", textAlign: "center" }}>
-              <span className="mono" style={{
-                fontSize: 13, color: "rgba(255,255,255,0.4)",
-                letterSpacing: "0.12em", textTransform: "uppercase",
-                display: "block", marginBottom: 28,
-              }}>
-                Event Details
+            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
+              <div className="shimmer-line" style={{ width: 40, height: 2 }} />
+              <span className="mono" style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                Venue
               </span>
+            </div>
+          </Reveal>
 
-              <h2 className="serif" style={{
-                fontSize: "clamp(36px, 5.5vw, 56px)",
-                fontWeight: 400, fontStyle: "italic", marginBottom: 48,
-                lineHeight: 1.1,
-              }}>
-                Mark your calendar.
-              </h2>
+          <Reveal delay={0.1}>
+            <Glass hover={false} className="glass-border" style={{ padding: "56px 52px", overflow: "hidden" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 56, alignItems: "center" }}>
+                <div>
+                  <h2 className="serif" style={{
+                    fontSize: "clamp(34px, 5vw, 52px)",
+                    fontWeight: 400, fontStyle: "italic", marginBottom: 24,
+                    lineHeight: 1.1,
+                  }}>
+                    Join us in<br />Raleigh-Durham.
+                  </h2>
+                  <p style={{
+                    fontSize: 18, color: "rgba(255,255,255,0.55)",
+                    lineHeight: 1.8, marginBottom: 32,
+                  }}>
+                    Exact venue details will be shared upon registration.
+                    Located in the heart of the Triangle area with easy access
+                    and free parking.
+                  </p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                    {[
+                      { label: "WiFi", detail: "High-speed provided" },
+                      { label: "Parking", detail: "Free on-site" },
+                      { label: "Food", detail: "Light refreshments" },
+                      { label: "Laptops", detail: "Bring your own" },
+                    ].map((item, i) => (
+                      <div key={i} style={{
+                        display: "flex", justifyContent: "space-between",
+                        padding: "12px 0",
+                        borderBottom: "1px solid rgba(255,255,255,0.05)",
+                      }}>
+                        <span style={{ fontSize: 16, fontWeight: 600, color: "rgba(255,255,255,0.8)" }}>{item.label}</span>
+                        <span style={{ fontSize: 16, color: "rgba(255,255,255,0.45)" }}>{item.detail}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-              <div style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-                gap: 36,
-              }}>
-                {[
-                  { label: "Date", value: "May 4, 2026" },
-                  { label: "Doors Open", value: "5:30 PM" },
-                  { label: "Workshop", value: "6 – 8 PM" },
-                  { label: "Format", value: "Hands-On" },
-                ].map((d, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
-                    whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.12 * i, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <p className="mono" style={{
-                      fontSize: 12, color: "rgba(255,255,255,0.35)",
-                      letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10,
-                    }}>{d.label}</p>
+                {/* Map placeholder / visual */}
+                <div style={{
+                  borderRadius: 20, overflow: "hidden",
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                  aspectRatio: "1", display: "flex",
+                  alignItems: "center", justifyContent: "center",
+                  position: "relative",
+                }}>
+                  <div style={{
+                    position: "absolute", inset: 0,
+                    background: "radial-gradient(circle at 60% 40%, rgba(99,102,241,0.08), transparent 60%)",
+                  }} />
+                  <div style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
+                    <div style={{
+                      fontSize: 56, marginBottom: 16, opacity: 0.6,
+                      animation: "float 6s ease-in-out infinite",
+                    }}>📍</div>
                     <p className="serif" style={{
-                      fontSize: 28, fontStyle: "italic", color: "#fff",
-                    }}>{d.value}</p>
-                  </motion.div>
-                ))}
+                      fontSize: 28, fontStyle: "italic", color: "rgba(255,255,255,0.7)",
+                      marginBottom: 8,
+                    }}>RDU Area</p>
+                    <p className="mono" style={{
+                      fontSize: 13, color: "rgba(255,255,255,0.35)",
+                      letterSpacing: "0.08em",
+                    }}>RALEIGH-DURHAM, NC</p>
+                  </div>
+                </div>
               </div>
             </Glass>
           </Reveal>
@@ -1163,12 +1312,12 @@ export default function EventPage() {
       <div className="section-divider" />
 
       {/* ═══════════════════════════════════
-          SECTION 6 — SPONSORS
+          SPONSORS
          ═══════════════════════════════════ */}
-      <section style={{ position: "relative", padding: "100px 32px 140px", zIndex: 2, textAlign: "center" }}>
+      <section style={{ position: "relative", padding: "100px 32px", zIndex: 2, textAlign: "center" }}>
         <Reveal>
           <span className="mono" style={{
-            fontSize: 13, color: "rgba(255,255,255,0.35)",
+            fontSize: 14, color: "rgba(255,255,255,0.4)",
             letterSpacing: "0.12em", textTransform: "uppercase",
           }}>Proudly Sponsored By</span>
         </Reveal>
@@ -1205,88 +1354,15 @@ export default function EventPage() {
       <div className="section-divider" />
 
       {/* ═══════════════════════════════════
-          SECTION 7 — WHY THIS MATTERS
-         ═══════════════════════════════════ */}
-      <section style={{ position: "relative", padding: "160px 32px", zIndex: 2 }}>
-        <Watermark text="Matters" style={{ top: "12%", left: "-5%" }} />
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <Reveal>
-            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
-              <div className="shimmer-line" style={{ width: 40, height: 2 }} />
-              <span className="mono" style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
-                Why It Matters
-              </span>
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="serif" style={{
-              fontSize: "clamp(36px, 5.5vw, 64px)",
-              fontWeight: 400, lineHeight: 1.1, letterSpacing: "-0.03em",
-              marginBottom: 64, maxWidth: 650,
-            }}>
-              The gap between learning AI and{" "}
-              <em style={{ fontStyle: "italic", color: "#f472b6" }}>doing AI</em>{" "}
-              is closing.
-            </h2>
-          </Reveal>
-
-          {/* Stats row */}
-          <Reveal delay={0.15}>
-            <div style={{
-              display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-              gap: 36, marginBottom: 64,
-            }}>
-              <StatNumber value="2" suffix="hr" label="Workshop" />
-              <StatNumber value="100" suffix="%" label="Hands-On" />
-              <StatNumber value="0" suffix="$" label="Cost" />
-            </div>
-          </Reveal>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 18 }}>
-            {[
-              { title: "Real-World Exposure", desc: "Work with the same AWS services powering Fortune 500 AI.", color: "#818cf8" },
-              { title: "Education ↔ Industry", desc: "Bridge the gap between classroom knowledge and professional tools.", color: "#06b6d4" },
-              { title: "Hands-On > Theory", desc: "Building is the fastest way to learn. Theory follows practice.", color: "#34d399" },
-            ].map((item, i) => (
-              <Reveal key={i} delay={0.12 * i}>
-                <TiltCard
-                  className="glass-border"
-                  style={{
-                    padding: "40px 32px", borderRadius: 28,
-                    background: "rgba(255,255,255,0.02)",
-                    backdropFilter: "blur(16px)", cursor: "default",
-                  }}
-                >
-                  <motion.div
-                    animate={{ boxShadow: [`0 0 16px ${item.color}40`, `0 0 28px ${item.color}70`, `0 0 16px ${item.color}40`] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
-                    style={{
-                      width: 10, height: 10, borderRadius: "50%",
-                      background: item.color,
-                      marginBottom: 28,
-                    }}
-                  />
-                  <h3 style={{ fontSize: 19, fontWeight: 700, marginBottom: 12, letterSpacing: "-0.01em" }}>{item.title}</h3>
-                  <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}>{item.desc}</p>
-                </TiltCard>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div className="section-divider" />
-
-      {/* ═══════════════════════════════════
-          SECTION 8 — FINAL CTA
+          FINAL CTA — Register
          ═══════════════════════════════════ */}
       <section id="register" style={{
-        position: "relative", padding: "200px 32px", zIndex: 2,
+        position: "relative", padding: "180px 32px", zIndex: 2,
         textAlign: "center", overflow: "hidden",
       }}>
         <Watermark text="Register" style={{ top: "30%", left: "50%", transform: "translateX(-50%)" }} />
 
-        {/* Massive background glow */}
+        {/* Background glow */}
         <div style={{
           position: "absolute", top: "50%", left: "50%",
           width: 700, height: 700,
@@ -1320,10 +1396,10 @@ export default function EventPage() {
         <div style={{ position: "relative", zIndex: 2, maxWidth: 700, margin: "0 auto" }}>
           <Reveal>
             <span className="mono" style={{
-              fontSize: 13, color: "rgba(255,255,255,0.35)",
+              fontSize: 14, color: "rgba(255,255,255,0.4)",
               letterSpacing: "0.12em", textTransform: "uppercase",
               display: "block", marginBottom: 36,
-            }}>Don't Miss Out</span>
+            }}>Limited Seats Available</span>
 
             <h2 className="serif" style={{
               fontSize: "clamp(44px, 8vw, 88px)",
@@ -1334,7 +1410,7 @@ export default function EventPage() {
             </h2>
 
             <p style={{
-              fontSize: 19, color: "rgba(255,255,255,0.5)",
+              fontSize: 19, color: "rgba(255,255,255,0.55)",
               maxWidth: 460, margin: "0 auto 56px", lineHeight: 1.7,
             }}>
               Seats are limited. Join us May 4th and build your first AI agent with AWS.
@@ -1359,13 +1435,13 @@ export default function EventPage() {
                   position: "relative", textDecoration: "none", display: "inline-block",
                 }}
               >
-                Register Now →
+                Register on Eventbrite →
               </motion.a>
             </MagneticWrap>
 
             <p className="mono" style={{
-              marginTop: 28, fontSize: 13,
-              color: "rgba(255,255,255,0.35)",
+              marginTop: 28, fontSize: 14,
+              color: "rgba(255,255,255,0.4)",
               letterSpacing: "0.08em",
             }}>
               FREE TO ATTEND · AWS CREDITS INCLUDED
@@ -1382,10 +1458,10 @@ export default function EventPage() {
         borderTop: "1px solid rgba(255,255,255,0.04)",
         textAlign: "center", zIndex: 2, position: "relative",
       }}>
-        <p className="mono" style={{ fontSize: 13, color: "rgba(255,255,255,0.3)", letterSpacing: "0.06em" }}>
+        <p className="mono" style={{ fontSize: 14, color: "rgba(255,255,255,0.35)", letterSpacing: "0.06em" }}>
           Blacks in Technology RDU · May 4, 2026
         </p>
-        <p className="mono" style={{ fontSize: 12, color: "rgba(255,255,255,0.15)", marginTop: 10, letterSpacing: "0.06em" }}>
+        <p className="mono" style={{ fontSize: 13, color: "rgba(255,255,255,0.2)", marginTop: 10, letterSpacing: "0.06em" }}>
           Powered by AWS & Northwestern Mutual
         </p>
       </footer>
