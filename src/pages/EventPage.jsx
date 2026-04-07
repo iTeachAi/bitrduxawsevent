@@ -1008,24 +1008,6 @@ export default function EventPage() {
         </div>
       </motion.section>
 
-      {/* ═══════════════════════════════════
-          EVENT INFO BAR — Quick-glance details
-         ═══════════════════════════════════ */}
-      <section style={{ position: "relative", padding: "0 32px 80px", zIndex: 2, marginTop: -20 }}>
-        <div style={{
-          maxWidth: 1100, margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-          gap: 16,
-        }}>
-          <Reveal delay={0}><InfoPill icon="📅" label="Date" value="Sunday, May 4, 2026" /></Reveal>
-          <Reveal delay={0.08}><InfoPill icon="🕐" label="Time" value="5:30 PM – 8:00 PM" /></Reveal>
-          <Reveal delay={0.16}><InfoPill icon="📍" label="Location" value="Raleigh-Durham, NC" /></Reveal>
-          <Reveal delay={0.24}><InfoPill icon="💰" label="Price" value="Free + AWS Credits" /></Reveal>
-        </div>
-      </section>
-
-      <div className="section-divider" />
 
       {/* ═══════════════════════════════════
           EVENT SCHEDULE — Timeline layout
