@@ -610,6 +610,120 @@ function InfoPill({ icon, label, value }) {
 }
 
 /* ══════════════════════════════════════════
+   CONTACT FORM
+   ══════════════════════════════════════════ */
+function ContactForm() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+
+  const handleChange = (e) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
+    setStatus("sending");
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/marqueso@blacksintechnology.com`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          _subject: "BIT RDU Workshop Inquiry",
+        }),
+      });
+      if (res.ok) {
+        setStatus("sent");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  const inputStyle = {
+    width: "100%", padding: "14px 18px", borderRadius: 14,
+    background: "rgba(255,255,255,0.04)",
+    border: "1px solid rgba(255,255,255,0.08)",
+    color: "#fff", fontSize: 16,
+    fontFamily: "'Syne', sans-serif",
+    outline: "none", transition: "border-color 0.3s ease",
+  };
+
+  return (
+    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+      <input
+        type="text"
+        name="name"
+        placeholder="Your name"
+        value={form.name}
+        onChange={handleChange}
+        required
+        style={inputStyle}
+        onFocus={(e) => e.target.style.borderColor = "rgba(99,102,241,0.4)"}
+        onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Your email"
+        value={form.email}
+        onChange={handleChange}
+        required
+        style={inputStyle}
+        onFocus={(e) => e.target.style.borderColor = "rgba(99,102,241,0.4)"}
+        onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
+      />
+      <textarea
+        name="message"
+        placeholder="Your message"
+        value={form.message}
+        onChange={handleChange}
+        required
+        rows={5}
+        style={{ ...inputStyle, resize: "vertical", minHeight: 120 }}
+        onFocus={(e) => e.target.style.borderColor = "rgba(99,102,241,0.4)"}
+        onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
+      />
+      <MagneticWrap strength={0.15}>
+        <motion.button
+          type="submit"
+          disabled={status === "sending"}
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.96 }}
+          style={{
+            padding: "16px 40px", borderRadius: 100, border: "none",
+            background: "linear-gradient(135deg, #6366f1, #06b6d4)",
+            color: "#fff", fontSize: 16, fontWeight: 700, cursor: "pointer",
+            fontFamily: "'Syne', sans-serif", letterSpacing: "-0.01em",
+            opacity: status === "sending" ? 0.6 : 1,
+            boxShadow: "0 0 30px rgba(99,102,241,0.2)",
+            width: "100%",
+          }}
+        >
+          {status === "sending" ? "Sending..." : status === "sent" ? "Message Sent ✓" : "Send Message →"}
+        </motion.button>
+      </MagneticWrap>
+      {status === "error" && (
+        <p style={{ fontSize: 14, color: "#f87171", textAlign: "center" }}>
+          Something went wrong. Please email us directly.
+        </p>
+      )}
+      {status === "sent" && (
+        <p style={{ fontSize: 14, color: "#34d399", textAlign: "center" }}>
+          Thanks! We'll be in touch soon.
+        </p>
+      )}
+    </form>
+  );
+}
+
+/* ══════════════════════════════════════════
    MAIN PAGE
    ══════════════════════════════════════════ */
 export default function EventPage() {
