@@ -899,7 +899,7 @@ export default function EventPage() {
               fontWeight: 400,
             }}
           >
-            A hands-on workshop for students and aspiring developers.
+            A hands-on workshop by Blacks In Technology RDU for students and aspiring developers.
             Build real AI agents using industry-grade tools.
           </motion.p>
 
