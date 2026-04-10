@@ -501,7 +501,7 @@ function Nav() {
             backdropFilter: "blur(12px)", letterSpacing: "0.01em",
             textDecoration: "none", display: "inline-block",
           }}
-        >Get Tickets</motion.a>
+        >Reserve Your Spot</motion.a>
       </MagneticWrap>
     </motion.nav>
   );
@@ -900,7 +900,7 @@ export default function EventPage() {
             }}
           >
             A hands-on workshop by Blacks In Technology RDU for students and aspiring developers.
-            Build real AI agents using industry-grade tools.
+            Build real AI agents using industry-grade tools — and launch your own landing page by the end of the session.
           </motion.p>
 
           {/* Event quick info row */}
@@ -958,7 +958,7 @@ export default function EventPage() {
                   textDecoration: "none", display: "inline-block", position: "relative",
                 }}
               >
-                Get Your Free Ticket →
+                Reserve Your Spot →
               </motion.a>
             </MagneticWrap>
             <MagneticWrap strength={0.15}>
@@ -1056,8 +1056,277 @@ export default function EventPage() {
       <div className="section-divider" />
 
       {/* ═══════════════════════════════════
-          ABOUT — What this event is
+          WHAT YOU'LL BUILD
          ═══════════════════════════════════ */}
+      <section style={{ position: "relative", padding: "140px 32px", zIndex: 2 }}>
+        <Watermark text="Build" style={{ top: "5%", left: "-5%" }} />
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <Reveal>
+            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
+              <div className="shimmer-line" style={{ width: 40, height: 2 }} />
+              <span className="mono" style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                What You'll Build
+              </span>
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h2 className="serif" style={{
+              fontSize: "clamp(36px, 5.5vw, 64px)",
+              fontWeight: 400, lineHeight: 1.1, letterSpacing: "-0.03em",
+              marginBottom: 20, maxWidth: 600,
+            }}>
+              Walk away with something <em style={{ fontStyle: "italic", color: "#06b6d4" }}>real</em>.
+            </h2>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p style={{ fontSize: 18, color: "rgba(255,255,255,0.55)", maxWidth: 560, lineHeight: 1.8, marginBottom: 64 }}>
+              By the end of this workshop, you'll have created and deployed a personalized landing page powered by an AI agent you built yourself.
+            </p>
+          </Reveal>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 18 }}>
+            {[
+              { icon: "🤖", title: "Build an AI Agent", desc: "Create a working AI-powered agent using AWS tools and services." },
+              { icon: "✍️", title: "Generate Content", desc: "Use your agent to produce copy, structure ideas, and draft content." },
+              { icon: "🚀", title: "Launch a Landing Page", desc: "Deploy a personal landing page live on the web before you leave." },
+              { icon: "💼", title: "Portfolio-Ready Project", desc: "Walk away with something tangible to showcase your skills." },
+            ].map((item, i) => (
+              <Reveal key={i} delay={0.1 * i}>
+                <TiltCard
+                  className="glass-border"
+                  style={{
+                    padding: "36px 30px", borderRadius: 28,
+                    background: "rgba(255,255,255,0.02)",
+                    backdropFilter: "blur(16px)",
+                    textAlign: "center", cursor: "default",
+                    minHeight: 220,
+                  }}
+                >
+                  <div style={{ fontSize: 40, marginBottom: 20 }}>{item.icon}</div>
+                  <h3 style={{ fontSize: 19, fontWeight: 700, marginBottom: 10, letterSpacing: "-0.01em" }}>{item.title}</h3>
+                  <p style={{ fontSize: 15, color: "rgba(255,255,255,0.5)", lineHeight: 1.6 }}>{item.desc}</p>
+                </TiltCard>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
+      {/* ═══════════════════════════════════
+          HOW IT WORKS — 3-step flow
+         ═══════════════════════════════════ */}
+      <section style={{ position: "relative", padding: "140px 32px", zIndex: 2 }}>
+        <Watermark text="Steps" style={{ top: "10%", right: "-6%" }} />
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <Reveal>
+            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
+              <div className="shimmer-line" style={{ width: 40, height: 2 }} />
+              <span className="mono" style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                How It Works
+              </span>
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h2 className="serif" style={{
+              fontSize: "clamp(36px, 5.5vw, 64px)",
+              fontWeight: 400, lineHeight: 1.1, letterSpacing: "-0.03em",
+              marginBottom: 64, maxWidth: 550,
+            }}>
+              Three steps to <em style={{ fontStyle: "italic", color: "#f59e0b" }}>launch</em>.
+            </h2>
+          </Reveal>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32, position: "relative" }}>
+            {/* Connecting line */}
+            <div style={{
+              position: "absolute", top: 52, left: "16.67%", right: "16.67%",
+              height: 2, background: "linear-gradient(90deg, rgba(99,102,241,0.3), rgba(6,182,212,0.3), rgba(52,211,153,0.3))",
+              zIndex: 0,
+            }} />
+            {[
+              { step: "01", title: "Log In", desc: "No complex setup. Sign in and you're ready to go.", color: "#6366f1" },
+              { step: "02", title: "Build Your Agent", desc: "Follow guided instruction to create your AI agent with AWS.", color: "#06b6d4" },
+              { step: "03", title: "Launch Your Page", desc: "Deploy your AI-generated landing page before the session ends.", color: "#34d399" },
+            ].map((item, i) => (
+              <Reveal key={i} delay={0.15 * i}>
+                <div style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    style={{
+                      width: 80, height: 80, borderRadius: "50%",
+                      background: `rgba(${item.color === "#6366f1" ? "99,102,241" : item.color === "#06b6d4" ? "6,182,212" : "52,211,153"},0.1)`,
+                      border: `2px solid ${item.color}40`,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      margin: "0 auto 28px",
+                      boxShadow: `0 0 30px ${item.color}20`,
+                    }}
+                  >
+                    <span className="mono" style={{ fontSize: 22, fontWeight: 700, color: item.color }}>{item.step}</span>
+                  </motion.div>
+                  <h3 style={{ fontSize: 22, fontWeight: 700, marginBottom: 12, letterSpacing: "-0.02em" }}>{item.title}</h3>
+                  <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", lineHeight: 1.7, maxWidth: 260, margin: "0 auto" }}>{item.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
+      {/* ═══════════════════════════════════
+          WHAT TO BRING
+         ═══════════════════════════════════ */}
+      <section style={{ position: "relative", padding: "140px 32px", zIndex: 2 }}>
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <Reveal>
+            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
+              <div className="shimmer-line" style={{ width: 40, height: 2 }} />
+              <span className="mono" style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                What to Bring
+              </span>
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h2 className="serif" style={{
+              fontSize: "clamp(36px, 5.5vw, 64px)",
+              fontWeight: 400, lineHeight: 1.1, letterSpacing: "-0.03em",
+              marginBottom: 64, maxWidth: 500,
+            }}>
+              Come <em style={{ fontStyle: "italic", color: "#818cf8" }}>prepared</em>.
+            </h2>
+          </Reveal>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+            {[
+              { icon: "💻", title: "Laptop", desc: "Required for participation. Any OS works.", required: true },
+              { icon: "📸", title: "Headshot Photo", desc: "For your landing page. A placeholder can be used if you don't have one.", required: false },
+              { icon: "🔋", title: "Charger", desc: "Recommended — the session is 2 hours of hands-on building.", required: false },
+            ].map((item, i) => (
+              <Reveal key={i} delay={0.12 * i}>
+                <Glass hover={true} className="glass-border" style={{
+                  padding: "40px 32px", textAlign: "center",
+                  position: "relative", overflow: "hidden",
+                }}>
+                  {item.required && (
+                    <span className="mono" style={{
+                      position: "absolute", top: 16, right: 16,
+                      fontSize: 11, color: "#f59e0b", letterSpacing: "0.1em",
+                      padding: "4px 12px", borderRadius: 100,
+                      background: "rgba(245,158,11,0.1)",
+                      border: "1px solid rgba(245,158,11,0.2)",
+                    }}>REQUIRED</span>
+                  )}
+                  <div style={{ fontSize: 48, marginBottom: 20 }}>{item.icon}</div>
+                  <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 12 }}>{item.title}</h3>
+                  <p style={{ fontSize: 15, color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}>{item.desc}</p>
+                </Glass>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
+      {/* ═══════════════════════════════════
+          AWS INTEGRATION — Partnership highlight
+         ═══════════════════════════════════ */}
+      <section style={{ position: "relative", padding: "140px 32px", zIndex: 2 }}>
+        <Watermark text="AWS" style={{ top: "10%", right: "-6%" }} />
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <Reveal>
+            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
+              <div className="shimmer-line" style={{ width: 40, height: 2 }} />
+              <span className="mono" style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                Powered by AWS
+              </span>
+            </div>
+          </Reveal>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
+            <div>
+              <Reveal delay={0.1}>
+                <h2 className="serif" style={{
+                  fontSize: "clamp(36px, 5.5vw, 58px)",
+                  fontWeight: 400, lineHeight: 1.1, letterSpacing: "-0.03em",
+                  marginBottom: 28,
+                }}>
+                  Built with{" "}
+                  <em style={{
+                    fontStyle: "italic",
+                    background: "linear-gradient(90deg, #f59e0b, #f97316)",
+                    WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}>Amazon Web Services</em>
+                </h2>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <p style={{
+                  fontSize: 18, color: "rgba(255,255,255,0.55)",
+                  lineHeight: 1.8, marginBottom: 36,
+                }}>
+                  This workshop is built in partnership with AWS. You'll get hands-on access to real cloud tools, guided instruction from experts, and the resources to keep building long after the session ends.
+                </p>
+              </Reveal>
+              <Reveal delay={0.3}>
+                <MagneticWrap strength={0.15}>
+                  <motion.a
+                    href="https://www.eventbrite.com/e/build-your-own-agent-workshop-with-aws-tickets-1986867145116?aff=oddtdtcreator"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.96 }}
+                    style={{
+                      display: "inline-flex", alignItems: "center", gap: 10,
+                      padding: "16px 36px", borderRadius: 100,
+                      background: "linear-gradient(135deg, rgba(245,158,11,0.15), rgba(249,115,22,0.1))",
+                      border: "1px solid rgba(245,158,11,0.3)",
+                      color: "#fff", fontSize: 16,
+                      fontFamily: "'Syne', sans-serif", fontWeight: 600,
+                      textDecoration: "none", cursor: "pointer",
+                    }}
+                  >
+                    Reserve Your Spot →
+                  </motion.a>
+                </MagneticWrap>
+              </Reveal>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+              {[
+                { title: "Hands-On Guided Instruction", desc: "Step-by-step walkthrough from setup to deployment — no one gets left behind.", icon: "🎯" },
+                { title: "Real AWS Tools & Resources", desc: "Work directly with AWS Bedrock, Lambda, and cloud infrastructure.", icon: "☁️" },
+                { title: "Keep Building After", desc: "Take your project home with resources and credits to continue learning.", icon: "🔄" },
+              ].map((item, i) => (
+                <Reveal key={i} delay={0.15 * i + 0.1}>
+                  <TiltCard
+                    className="glass-border"
+                    style={{
+                      padding: "28px 24px", borderRadius: 24,
+                      background: "rgba(255,255,255,0.02)",
+                      backdropFilter: "blur(20px)",
+                      cursor: "default",
+                      display: "flex", gap: 18, alignItems: "flex-start",
+                    }}
+                  >
+                    <div style={{ fontSize: 28, flexShrink: 0, marginTop: 2 }}>{item.icon}</div>
+                    <div>
+                      <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8, letterSpacing: "-0.02em" }}>{item.title}</h3>
+                      <p style={{ fontSize: 15, color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}>{item.desc}</p>
+                    </div>
+                  </TiltCard>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider" />
       <section id="about" style={{ position: "relative", padding: "140px 32px", zIndex: 2 }}>
         <Watermark text="Workshop" style={{ top: "5%", right: "-8%" }} />
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
@@ -1451,7 +1720,7 @@ export default function EventPage() {
               fontSize: 14, color: "rgba(255,255,255,0.4)",
               letterSpacing: "0.12em", textTransform: "uppercase",
               display: "block", marginBottom: 36,
-            }}>Limited Seats Available</span>
+            }}>Limited to 50 Attendees</span>
 
             <h2 className="serif" style={{
               fontSize: "clamp(44px, 8vw, 88px)",
@@ -1463,10 +1732,28 @@ export default function EventPage() {
 
             <p style={{
               fontSize: 19, color: "rgba(255,255,255,0.55)",
-              maxWidth: 460, margin: "0 auto 56px", lineHeight: 1.7,
+              maxWidth: 460, margin: "0 auto 20px", lineHeight: 1.7,
             }}>
-              Seats are limited. Join us May 4th and build your first AI agent with AWS.
+              Join us May 4th and build your first AI agent with AWS. Walk away with a portfolio-ready project.
             </p>
+
+            <div style={{
+              display: "flex", justifyContent: "center", gap: 24, marginBottom: 48,
+              flexWrap: "wrap",
+            }}>
+              <span className="mono" style={{
+                fontSize: 13, color: "#34d399", letterSpacing: "0.08em",
+                padding: "6px 18px", borderRadius: 100,
+                background: "rgba(52,211,153,0.08)",
+                border: "1px solid rgba(52,211,153,0.2)",
+              }}>FREE REGISTRATION</span>
+              <span className="mono" style={{
+                fontSize: 13, color: "#f59e0b", letterSpacing: "0.08em",
+                padding: "6px 18px", borderRadius: 100,
+                background: "rgba(245,158,11,0.08)",
+                border: "1px solid rgba(245,158,11,0.2)",
+              }}>LIMITED TO 50 SEATS</span>
+            </div>
           </Reveal>
 
           <Reveal delay={0.2}>
@@ -1487,7 +1774,7 @@ export default function EventPage() {
                   position: "relative", textDecoration: "none", display: "inline-block",
                 }}
               >
-                Register on Eventbrite →
+                Reserve Your Spot →
               </motion.a>
             </MagneticWrap>
 
