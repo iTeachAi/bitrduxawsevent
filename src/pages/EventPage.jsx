@@ -501,7 +501,7 @@ function Nav() {
             backdropFilter: "blur(12px)", letterSpacing: "0.01em",
             textDecoration: "none", display: "inline-block",
           }}
-        >Get Tickets</motion.a>
+        >Reserve Your Spot</motion.a>
       </MagneticWrap>
     </motion.nav>
   );
@@ -900,7 +900,7 @@ export default function EventPage() {
             }}
           >
             A hands-on workshop by Blacks In Technology RDU for students and aspiring developers.
-            Build real AI agents using industry-grade tools.
+            Build real AI agents using industry-grade tools — and launch your own landing page by the end of the session.
           </motion.p>
 
           {/* Event quick info row */}
@@ -958,7 +958,7 @@ export default function EventPage() {
                   textDecoration: "none", display: "inline-block", position: "relative",
                 }}
               >
-                Get Your Free Ticket →
+                Reserve Your Spot →
               </motion.a>
             </MagneticWrap>
             <MagneticWrap strength={0.15}>
@@ -1451,7 +1451,7 @@ export default function EventPage() {
               fontSize: 14, color: "rgba(255,255,255,0.4)",
               letterSpacing: "0.12em", textTransform: "uppercase",
               display: "block", marginBottom: 36,
-            }}>Limited Seats Available</span>
+            }}>Limited to 50 Attendees</span>
 
             <h2 className="serif" style={{
               fontSize: "clamp(44px, 8vw, 88px)",
@@ -1463,10 +1463,28 @@ export default function EventPage() {
 
             <p style={{
               fontSize: 19, color: "rgba(255,255,255,0.55)",
-              maxWidth: 460, margin: "0 auto 56px", lineHeight: 1.7,
+              maxWidth: 460, margin: "0 auto 20px", lineHeight: 1.7,
             }}>
-              Seats are limited. Join us May 4th and build your first AI agent with AWS.
+              Join us May 4th and build your first AI agent with AWS. Walk away with a portfolio-ready project.
             </p>
+
+            <div style={{
+              display: "flex", justifyContent: "center", gap: 24, marginBottom: 48,
+              flexWrap: "wrap",
+            }}>
+              <span className="mono" style={{
+                fontSize: 13, color: "#34d399", letterSpacing: "0.08em",
+                padding: "6px 18px", borderRadius: 100,
+                background: "rgba(52,211,153,0.08)",
+                border: "1px solid rgba(52,211,153,0.2)",
+              }}>FREE REGISTRATION</span>
+              <span className="mono" style={{
+                fontSize: 13, color: "#f59e0b", letterSpacing: "0.08em",
+                padding: "6px 18px", borderRadius: 100,
+                background: "rgba(245,158,11,0.08)",
+                border: "1px solid rgba(245,158,11,0.2)",
+              }}>LIMITED TO 50 SEATS</span>
+            </div>
           </Reveal>
 
           <Reveal delay={0.2}>
@@ -1487,7 +1505,7 @@ export default function EventPage() {
                   position: "relative", textDecoration: "none", display: "inline-block",
                 }}
               >
-                Register on Eventbrite →
+                Reserve Your Spot →
               </motion.a>
             </MagneticWrap>
 
