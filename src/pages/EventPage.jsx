@@ -624,8 +624,8 @@ export default function EventPage() {
     { time: "6:00 PM", title: "Welcome & Keynote", desc: "Opening remarks from Blacks in Technology RDU. Why AI agents matter now.", accent: "#06b6d4" },
     { time: "6:20 PM", title: "Live Demo: AI Agent from Scratch", desc: "Watch an AI agent get built live using AWS Bedrock — from prompt to deployment.", accent: "#34d399" },
     { time: "6:45 PM", title: "Hands-On Workshop Begins", desc: "Your turn. Build your own AI agent step-by-step with guided instruction and AWS credits.", accent: "#f472b6" },
-    { time: "7:30 PM", title: "Show & Tell + Q&A", desc: "Demo what you built, ask questions, and learn from each other's approaches.", accent: "#f59e0b" },
-    { time: "8:00 PM", title: "Networking & Close", desc: "Connect with sponsors, organizers, and fellow builders. Refreshments provided.", accent: "#818cf8" },
+    { time: "7:30 PM", title: "Q&A + Networking", desc: "Ask questions, connect with sponsors, organizers, and fellow builders. Refreshments provided.", accent: "#f59e0b" },
+    { time: "8:00 PM", title: "Close", desc: "Thank you for joining us! Continue building and stay connected with the community.", accent: "#818cf8" },
   ];
 
   const audiences = [
