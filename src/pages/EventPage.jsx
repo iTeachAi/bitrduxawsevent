@@ -935,6 +935,16 @@ export default function EventPage() {
             ))}
           </motion.div>
 
+          {/* Live Ticket Sphere */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.35 }}
+            style={{ position: "relative", zIndex: 2, marginTop: 24, marginBottom: -20 }}
+          >
+            <TicketSphere />
+          </motion.div>
+
           {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1716,20 +1726,7 @@ export default function EventPage() {
         }} />
 
         <div style={{ position: "relative", zIndex: 2, maxWidth: 700, margin: "0 auto" }}>
-          <Reveal>
-            <span className="mono" style={{
-              fontSize: 14, color: "rgba(255,255,255,0.4)",
-              letterSpacing: "0.12em", textTransform: "uppercase",
-              display: "block", marginBottom: 24,
-            }}>Live Availability</span>
-          </Reveal>
-
           <Reveal delay={0.1}>
-            <TicketSphere />
-          </Reveal>
-
-          <Reveal delay={0.15}>
-
             <h2 className="serif" style={{
               fontSize: "clamp(44px, 8vw, 88px)",
               fontWeight: 400, fontStyle: "italic", lineHeight: 1,
@@ -1737,7 +1734,9 @@ export default function EventPage() {
             }}>
               Ready to build<br />the future?
             </h2>
+          </Reveal>
 
+          <Reveal delay={0.15}>
             <p style={{
               fontSize: 19, color: "rgba(255,255,255,0.55)",
               maxWidth: 460, margin: "0 auto 20px", lineHeight: 1.7,
