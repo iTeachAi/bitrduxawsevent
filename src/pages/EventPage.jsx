@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo, Fragment } from "react";
 import { motion, useInView, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
-import TicketSphere from "@/components/TicketSphere";
+import TicketCounter from "@/components/TicketCounter";
 
 /* ══════════════════════════════════════════
    3D FLOATING GEOMETRY — Canvas Background
