@@ -904,6 +904,16 @@ export default function EventPage() {
             Build real AI agents using industry-grade tools — and launch your own landing page by the end of the session.
           </motion.p>
 
+          {/* Live ticket availability */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.15 }}
+            style={{ position: "relative", zIndex: 2, maxWidth: 340, margin: "0 auto", transform: "scale(0.65)", transformOrigin: "center top" }}
+          >
+            <TicketSphere />
+          </motion.div>
+
           {/* Event quick info row */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
