@@ -1735,11 +1735,6 @@ export default function EventPage() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <TicketSphere />
-          </Reveal>
-
-          <Reveal delay={0.15}>
-
             <h2 className="serif" style={{
               fontSize: "clamp(44px, 8vw, 88px)",
               fontWeight: 400, fontStyle: "italic", lineHeight: 1,
