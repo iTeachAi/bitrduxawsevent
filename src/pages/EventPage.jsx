@@ -1726,7 +1726,7 @@ export default function EventPage() {
         }} />
 
         <div style={{ position: "relative", zIndex: 2, maxWidth: 700, margin: "0 auto" }}>
-
+          <Reveal delay={0.1}>
             <h2 className="serif" style={{
               fontSize: "clamp(44px, 8vw, 88px)",
               fontWeight: 400, fontStyle: "italic", lineHeight: 1,
@@ -1734,7 +1734,9 @@ export default function EventPage() {
             }}>
               Ready to build<br />the future?
             </h2>
+          </Reveal>
 
+          <Reveal delay={0.15}>
             <p style={{
               fontSize: 19, color: "rgba(255,255,255,0.55)",
               maxWidth: 460, margin: "0 auto 20px", lineHeight: 1.7,
