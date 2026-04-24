@@ -1811,6 +1811,11 @@ export default function EventPage() {
         <p className="mono" style={{ fontSize: 13, color: "rgba(255,255,255,0.2)", marginTop: 10, letterSpacing: "0.06em" }}>
           Powered by AWS & Northwestern Mutual
         </p>
+        <a href="/admin" className="mono" style={{
+          display: "inline-block", marginTop: 18, fontSize: 11,
+          color: "rgba(255,255,255,0.18)", letterSpacing: "0.12em",
+          textDecoration: "none", textTransform: "uppercase",
+        }}>Admin</a>
       </footer>
     </div>
   );
