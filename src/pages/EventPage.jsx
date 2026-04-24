@@ -1720,8 +1720,15 @@ export default function EventPage() {
             <span className="mono" style={{
               fontSize: 14, color: "rgba(255,255,255,0.4)",
               letterSpacing: "0.12em", textTransform: "uppercase",
-              display: "block", marginBottom: 36,
-            }}>Limited to 50 Attendees</span>
+              display: "block", marginBottom: 24,
+            }}>Live Availability</span>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <TicketSphere />
+          </Reveal>
+
+          <Reveal delay={0.15}>
 
             <h2 className="serif" style={{
               fontSize: "clamp(44px, 8vw, 88px)",
