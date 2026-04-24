@@ -935,6 +935,16 @@ export default function EventPage() {
             ))}
           </motion.div>
 
+          {/* Live ticket availability */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.3 }}
+            style={{ position: "relative", zIndex: 2, marginBottom: 24 }}
+          >
+            <TicketSphere />
+          </motion.div>
+
           {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
