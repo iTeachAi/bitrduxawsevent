@@ -47,51 +47,73 @@ export default function TicketCounter() {
   const progress = capacity > 0 ? Math.min(sold / capacity, 1) : 0;
   const pct = Math.round(progress * 100);
 
-  const circumference = 2 * Math.PI * 18;
+  const ringRadius = 36;
+  const circumference = 2 * Math.PI * ringRadius;
   const dashOffset = circumference - progress * circumference;
+
+  const statusColor =
+    pct >= 90 ? "#ef4444" : pct >= 70 ? "#f59e0b" : "#34d399";
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
+      initial={{ opacity: 0, scale: 0.92 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6, delay: 1.1 }}
+      transition={{ duration: 0.7, delay: 1.1 }}
       style={{
-        display: "inline-flex",
+        display: "flex",
+        flexDirection: "column",
         alignItems: "center",
-        gap: 14,
-        padding: "10px 20px",
-        borderRadius: 100,
-        background: "rgba(255,255,255,0.03)",
-        border: "1px solid rgba(255,255,255,0.08)",
-        backdropFilter: "blur(20px)",
+        gap: 16,
+        padding: "24px 36px",
+        borderRadius: 24,
+        background: "rgba(255,255,255,0.025)",
+        border: "1px solid rgba(255,255,255,0.06)",
+        backdropFilter: "blur(28px)",
+        WebkitBackdropFilter: "blur(28px)",
         position: "relative",
         zIndex: 2,
+        maxWidth: 280,
+        width: "100%",
+        margin: "0 auto",
       }}
     >
-      {/* Mini ring */}
-      <div style={{ position: "relative", width: 40, height: 40, flexShrink: 0 }}>
-        <svg width="40" height="40" style={{ transform: "rotate(-90deg)" }}>
+      {/* Ring */}
+      <div
+        style={{
+          position: "relative",
+          width: ringRadius * 2 + 8,
+          height: ringRadius * 2 + 8,
+          flexShrink: 0,
+        }}
+      >
+        <svg
+          width={ringRadius * 2 + 8}
+          height={ringRadius * 2 + 8}
+          style={{ transform: "rotate(-90deg)" }}
+        >
           <circle
-            cx="20"
-            cy="20"
-            r="18"
+            cx={ringRadius + 4}
+            cy={ringRadius + 4}
+            r={ringRadius}
             fill="none"
             stroke="rgba(255,255,255,0.06)"
-            strokeWidth="3"
+            strokeWidth="4"
           />
           <motion.circle
-            cx="20"
-            cy="20"
-            r="18"
+            cx={ringRadius + 4}
+            cy={ringRadius + 4}
+            r={ringRadius}
             fill="none"
-            stroke={pct >= 90 ? "#ef4444" : pct >= 70 ? "#f59e0b" : "#34d399"}
-            strokeWidth="3"
+            stroke={statusColor}
+            strokeWidth="4"
             strokeLinecap="round"
             strokeDasharray={circumference}
             initial={{ strokeDashoffset: circumference }}
             animate={{ strokeDashoffset: dashOffset }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            style={{ filter: `drop-shadow(0 0 4px ${pct >= 90 ? "#ef4444" : pct >= 70 ? "#f59e0b" : "#34d399"}60)` }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            style={{
+              filter: `drop-shadow(0 0 6px ${statusColor}70)`,
+            }}
           />
         </svg>
         <div
@@ -101,81 +123,110 @@ export default function TicketCounter() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontFamily: "'DM Mono', monospace",
-            fontSize: 10,
-            fontWeight: 500,
-            color: "rgba(255,255,255,0.7)",
+            flexDirection: "column",
+            gap: 2,
           }}
         >
           <AnimatePresence mode="wait">
             <motion.span
-              key={pct}
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.2 }}
-            >
-              {pct}%
-            </motion.span>
-          </AnimatePresence>
-        </div>
-      </div>
-
-      {/* Text */}
-      <div style={{ textAlign: "left" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 2 }}>
-          <div
-            style={{
-              width: 6,
-              height: 6,
-              borderRadius: "50%",
-              background: remaining > 10 ? "#34d399" : remaining > 5 ? "#f59e0b" : "#ef4444",
-              boxShadow: `0 0 8px ${remaining > 10 ? "#34d399" : remaining > 5 ? "#f59e0b" : "#ef4444"}`,
-              animation: "glow-pulse 2s ease-in-out infinite",
-            }}
-          />
-          <span
-            className="mono"
-            style={{
-              fontSize: 11,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "rgba(255,255,255,0.5)",
-              fontWeight: 500,
-            }}
-          >
-            Live Availability
-          </span>
-        </div>
-        <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
-          <AnimatePresence mode="wait">
-            <motion.span
               key={remaining}
-              initial={{ opacity: 0, y: 3 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -3 }}
+              exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.25 }}
               style={{
                 fontFamily: "'Syne', sans-serif",
-                fontSize: 18,
+                fontSize: 28,
                 fontWeight: 700,
                 color: "#fff",
-                letterSpacing: "-0.02em",
+                letterSpacing: "-0.03em",
+                lineHeight: 1,
               }}
             >
               {remaining}
             </motion.span>
           </AnimatePresence>
           <span
-            className="mono"
             style={{
-              fontSize: 11,
+              fontFamily: "'DM Mono', monospace",
+              fontSize: 10,
+              fontWeight: 500,
               color: "rgba(255,255,255,0.45)",
-              letterSpacing: "0.05em",
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
             }}
           >
-            of {capacity} seats left
+            left
           </span>
+        </div>
+      </div>
+
+      {/* Text block */}
+      <div style={{ textAlign: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 8,
+            marginBottom: 6,
+          }}
+        >
+          <div
+            style={{
+              width: 7,
+              height: 7,
+              borderRadius: "50%",
+              background: statusColor,
+              boxShadow: `0 0 10px ${statusColor}80`,
+              animation: "glow-pulse 2.5s ease-in-out infinite",
+            }}
+          />
+          <span
+            className="mono"
+            style={{
+              fontSize: 12,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.5)",
+              fontWeight: 600,
+            }}
+          >
+            Live Availability
+          </span>
+        </div>
+        <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: 6 }}>
+          <span
+            className="mono"
+            style={{
+              fontSize: 13,
+              color: "rgba(255,255,255,0.35)",
+              letterSpacing: "0.04em",
+            }}
+          >
+            {sold} / {capacity} claimed
+          </span>
+        </div>
+        <div
+          style={{
+            marginTop: 8,
+            height: 3,
+            borderRadius: 100,
+            background: "rgba(255,255,255,0.06)",
+            overflow: "hidden",
+            width: "100%",
+          }}
+        >
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: `${pct}%` }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            style={{
+              height: "100%",
+              borderRadius: 100,
+              background: `linear-gradient(90deg, ${statusColor}90, ${statusColor})`,
+            }}
+          />
         </div>
       </div>
     </motion.div>
