@@ -622,8 +622,8 @@ export default function EventPage() {
   const schedule = [
     { time: "5:30 PM", title: "Doors Open & Check-in", desc: "Grab your badge, meet fellow attendees, and get set up with your AWS environment.", accent: "#818cf8" },
     { time: "6:00 PM", title: "Welcome & Keynote", desc: "Opening remarks from Blacks in Technology RDU. Why AI agents matter now.", accent: "#06b6d4" },
-    { time: "6:20 PM", title: "Live Demo: AI Agent from Scratch", desc: "Watch an AI agent get built live using AWS Bedrock — from prompt to deployment.", accent: "#34d399" },
-    { time: "6:45 PM", title: "Hands-On Workshop Begins", desc: "Your turn. Build your own AI agent step-by-step with guided instruction and AWS credits.", accent: "#f472b6" },
+    { time: "6:15 PM", title: "Live Demo: AI Agent from Scratch", desc: "Watch an AI agent get built live using AWS Bedrock — from prompt to deployment.", accent: "#34d399" },
+    { time: "6:30 PM", title: "Hands-On Workshop Begins", desc: "Your turn. Build your own AI agent step-by-step with guided instruction and AWS credits.", accent: "#f472b6" },
     { time: "8:00 PM", title: "Close", desc: "Thank you for joining us! Continue building and stay connected with the community.", accent: "#818cf8" },
   ];
 
