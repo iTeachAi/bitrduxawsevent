@@ -851,7 +851,7 @@ export default function EventPage() {
               letterSpacing: "-0.04em",
               color: "#fff",
             }}>
-              <TextReveal text="Build" delay={0.5} style={{ color: "#fff" }} />
+              <TextReveal text="Building" delay={0.5} style={{ color: "#fff" }} />
               {" "}
               <motion.em
                 initial={{ opacity: 0, x: -30 }}
@@ -870,7 +870,7 @@ export default function EventPage() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 1.1 }}
                 style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.5em" }}
-              >with</motion.span>
+              >using</motion.span>
               {" "}
               <motion.span
                 initial={{ opacity: 0, scale: 0.8 }}
